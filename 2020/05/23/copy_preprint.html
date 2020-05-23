@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>COVID-19 RESEARCH PPRINT DATA EDA | DataScienceProjects with OM</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="COVID-19 RESEARCH PPRINT DATA EDA" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Here You can see my projects and their JupyterNotebook :D" />
+<meta property="og:description" content="Here You can see my projects and their JupyterNotebook :D" />
+<link rel="canonical" href="https://omegaji.github.io/DataScienceBlog/2020/05/23/copy_preprint.html" />
+<meta property="og:url" content="https://omegaji.github.io/DataScienceBlog/2020/05/23/copy_preprint.html" />
+<meta property="og:site_name" content="DataScienceProjects with OM" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-23T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Here You can see my projects and their JupyterNotebook :D","@type":"BlogPosting","headline":"COVID-19 RESEARCH PPRINT DATA EDA","dateModified":"2020-05-23T00:00:00-05:00","datePublished":"2020-05-23T00:00:00-05:00","url":"https://omegaji.github.io/DataScienceBlog/2020/05/23/copy_preprint.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://omegaji.github.io/DataScienceBlog/2020/05/23/copy_preprint.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/DataScienceBlog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://omegaji.github.io/DataScienceBlog/feed.xml" title="DataScienceProjects with OM" /><link rel="shortcut icon" type="image/x-icon" href="/DataScienceBlog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>COVID-19 RESEARCH PPRINT DATA EDA | DataScienceProjects with OM</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="COVID-19 RESEARCH PPRINT DATA EDA" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Here You can see my projects and their JupyterNotebook :D" />
+<meta property="og:description" content="Here You can see my projects and their JupyterNotebook :D" />
+<link rel="canonical" href="https://omegaji.github.io/DataScienceBlog/2020/05/23/copy_preprint.html" />
+<meta property="og:url" content="https://omegaji.github.io/DataScienceBlog/2020/05/23/copy_preprint.html" />
+<meta property="og:site_name" content="DataScienceProjects with OM" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-23T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Here You can see my projects and their JupyterNotebook :D","@type":"BlogPosting","headline":"COVID-19 RESEARCH PPRINT DATA EDA","dateModified":"2020-05-23T00:00:00-05:00","datePublished":"2020-05-23T00:00:00-05:00","url":"https://omegaji.github.io/DataScienceBlog/2020/05/23/copy_preprint.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://omegaji.github.io/DataScienceBlog/2020/05/23/copy_preprint.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://omegaji.github.io/DataScienceBlog/feed.xml" title="DataScienceProjects with OM" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/DataScienceBlog/">DataScienceProjects with OM</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/DataScienceBlog/about/">About Me</a><a class="page-link" href="/DataScienceBlog/search/">Search</a><a class="page-link" href="/DataScienceBlog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">COVID-19 RESEARCH PPRINT DATA EDA</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-05-23T00:00:00-05:00" itemprop="datePublished">
+        May 23, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/omegaji/DataScienceBlog/tree/master/_notebooks/2020-05-23-copy_preprint.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/DataScienceBlog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/omegaji/DataScienceBlog/master?filepath=_notebooks%2F2020-05-23-copy_preprint.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/DataScienceBlog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/omegaji/DataScienceBlog/blob/master/_notebooks/2020-05-23-copy_preprint.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/DataScienceBlog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-05-23-copy_preprint.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;COVID-19-Preprint-Data_ver2.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3> Welcome to this notebook, Here lets get a glimpse of the data and list the columns</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Index([&#39;DOI&#39;, &#39;Date of Upload&#39;, &#39;Title of preprint&#39;, &#39;Preprint Link&#39;,
+       &#39;Abstract&#39;, &#39;Number of Authors&#39;, &#39;Authors&#39;, &#39;Author(s) Institutions&#39;,
+       &#39;Uploaded Site&#39;],
+      dtype=&#39;object&#39;)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DOI</th>
+      <th>Date of Upload</th>
+      <th>Title of preprint</th>
+      <th>Preprint Link</th>
+      <th>Abstract</th>
+      <th>Number of Authors</th>
+      <th>Authors</th>
+      <th>Author(s) Institutions</th>
+      <th>Uploaded Site</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10.1101/2020.05.13.20088732</td>
+      <td>2020-05-16</td>
+      <td>MRI of the lungs in patients with COVID-19: cl...</td>
+      <td>http://medrxiv.org/cgi/content/short/2020.05.1...</td>
+      <td>Objective: To evaluate an applicability of lun...</td>
+      <td>16</td>
+      <td>['Yuriy Vasilev', 'Kristina Sergunova', 'Alexa...</td>
+      <td>{"Research and Practical Clinical Center for D...</td>
+      <td>medrxiv</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.1101/2020.05.15.098616</td>
+      <td>2020-05-15</td>
+      <td>SARS-CoV2 (COVID-19) Structural/Evolution Dyna...</td>
+      <td>http://biorxiv.org/cgi/content/short/2020.05.1...</td>
+      <td>The SARS-CoV-2 pandemic, starting in 2019, has...</td>
+      <td>22</td>
+      <td>['Ruchir Gupta', 'Jacob Charron', 'Cynthia Ste...</td>
+      <td>{"Michigan State University": 9, "University o...</td>
+      <td>biorxiv</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10.1101/2020.05.10.20069732</td>
+      <td>2020-05-15</td>
+      <td>COVID-19 and Environmental factors. A PRISMA-c...</td>
+      <td>http://medrxiv.org/cgi/content/short/2020.05.1...</td>
+      <td>The emergence of a novel human coronavirus, SA...</td>
+      <td>3</td>
+      <td>['Apostolos Vantarakis', 'Ioanna Chatziprodrom...</td>
+      <td>{"University of Patras": 2, "Department of Phy...</td>
+      <td>medrxiv</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10.1101/2020.05.14.097311</td>
+      <td>2020-05-15</td>
+      <td>Analytical and Clinical Comparison of Three Nu...</td>
+      <td>http://biorxiv.org/cgi/content/short/2020.05.1...</td>
+      <td>Severe Acute Respiratory Syndrome Coronavirus ...</td>
+      <td>6</td>
+      <td>['Elizabeth Smith', 'Wei Zhen', 'Ryhana Manji'...</td>
+      <td>{"Northwell Health Laboratories": 5, "Northwel...</td>
+      <td>biorxiv</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10.1101/2020.05.14.093054</td>
+      <td>2020-05-15</td>
+      <td>A single dose SARS-CoV-2 simulating particle v...</td>
+      <td>http://biorxiv.org/cgi/content/short/2020.05.1...</td>
+      <td>Coronavirus disease 2019 (COVID-19) is caused ...</td>
+      <td>17</td>
+      <td>['Yujia Cai', 'Di Yin', 'Sikai Ling', 'Xiaolon...</td>
+      <td>{"Shanghai Jiao Tong University": 11, "Fudan U...</td>
+      <td>biorxiv</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4> Ah of course the first thing I always would do is to split the Datetime into day,month,year and day in year(like 1st febuary is the 32nd day of the year , this helps in plotting :D)</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Date of Upload&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">day</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Date of Upload&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">month</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Date of Upload&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">year</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;day_in_year&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Date of Upload&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()</span><span class="o">.</span><span class="n">tm_yday</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4> I am going to drop the columns below as I do not aim to use it in my EDA</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Preprint Link&quot;</span><span class="p">,</span><span class="s2">&quot;DOI&quot;</span><span class="p">,</span><span class="s2">&quot;Date of Upload&quot;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4> Our first plot in the notebook is a simple one and I have done it using Altair, here I plot the number of abstracts(or generally papers ) submitted per day 
+<ul><li> -X= day in the year</li>
+<li> -Y= the count of the number of abstracts(research papers) published in that particular day</li></ul>
+<h4> the below plot is a bubble plot which increases its size as the number of abstracts per day, you can hover for more info</h4>
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;day_in_year&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;day_in_year&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Abstract&#39;</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Abstract&quot;</span><span class="p">,</span><span class="s2">&quot;day_in_year&quot;</span><span class="p">],</span>
+    <span class="n">size</span><span class="o">=</span><span class="s2">&quot;Abstract&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-26142bef51f746289c64d228d21ccf43"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-26142bef51f746289c64d228d21ccf43") {
+      outputDiv = document.getElementById("altair-viz-26142bef51f746289c64d228d21ccf43");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-3f98d7ce6131d5c9d94465847ce54a28"}, "mark": "point", "encoding": {"size": {"type": "quantitative", "field": "Abstract"}, "tooltip": [{"type": "quantitative", "field": "Abstract"}, {"type": "quantitative", "field": "day_in_year"}], "x": {"type": "quantitative", "field": "day_in_year"}, "y": {"type": "quantitative", "field": "Abstract"}}, "selection": {"selector013": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-3f98d7ce6131d5c9d94465847ce54a28": [{"day_in_year": 13, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 19, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 21, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 22, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 23, "Title of preprint": 2, "Abstract": 2, "Number of Authors": 2, "Authors": 2, "Author(s) Institutions": 2, "Uploaded Site": 2, "day": 2, "month": 2, "year": 2}, {"day_in_year": 24, "Title of preprint": 5, "Abstract": 5, "Number of Authors": 5, "Authors": 5, "Author(s) Institutions": 5, "Uploaded Site": 5, "day": 5, "month": 5, "year": 5}, {"day_in_year": 25, "Title of preprint": 4, "Abstract": 4, "Number of Authors": 4, "Authors": 4, "Author(s) Institutions": 4, "Uploaded Site": 4, "day": 4, "month": 4, "year": 4}, {"day_in_year": 26, "Title of preprint": 3, "Abstract": 3, "Number of Authors": 3, "Authors": 3, "Author(s) Institutions": 3, "Uploaded Site": 3, "day": 3, "month": 3, "year": 3}, {"day_in_year": 27, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 28, "Title of preprint": 8, "Abstract": 8, "Number of Authors": 8, "Authors": 8, "Author(s) Institutions": 8, "Uploaded Site": 8, "day": 8, "month": 8, "year": 8}, {"day_in_year": 29, "Title of preprint": 3, "Abstract": 3, "Number of Authors": 3, "Authors": 3, "Author(s) Institutions": 3, "Uploaded Site": 3, "day": 3, "month": 3, "year": 3}, {"day_in_year": 30, "Title of preprint": 4, "Abstract": 4, "Number of Authors": 4, "Authors": 4, "Author(s) Institutions": 4, "Uploaded Site": 4, "day": 4, "month": 4, "year": 4}, {"day_in_year": 31, "Title of preprint": 4, "Abstract": 4, "Number of Authors": 4, "Authors": 4, "Author(s) Institutions": 4, "Uploaded Site": 4, "day": 4, "month": 4, "year": 4}, {"day_in_year": 33, "Title of preprint": 11, "Abstract": 11, "Number of Authors": 11, "Authors": 11, "Author(s) Institutions": 11, "Uploaded Site": 11, "day": 11, "month": 11, "year": 11}, {"day_in_year": 34, "Title of preprint": 3, "Abstract": 3, "Number of Authors": 3, "Authors": 3, "Author(s) Institutions": 3, "Uploaded Site": 3, "day": 3, "month": 3, "year": 3}, {"day_in_year": 35, "Title of preprint": 8, "Abstract": 8, "Number of Authors": 8, "Authors": 8, "Author(s) Institutions": 8, "Uploaded Site": 8, "day": 8, "month": 8, "year": 8}, {"day_in_year": 36, "Title of preprint": 11, "Abstract": 11, "Number of Authors": 11, "Authors": 11, "Author(s) Institutions": 11, "Uploaded Site": 11, "day": 11, "month": 11, "year": 11}, {"day_in_year": 37, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 38, "Title of preprint": 3, "Abstract": 3, "Number of Authors": 3, "Authors": 3, "Author(s) Institutions": 3, "Uploaded Site": 3, "day": 3, "month": 3, "year": 3}, {"day_in_year": 39, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 40, "Title of preprint": 3, "Abstract": 3, "Number of Authors": 3, "Authors": 3, "Author(s) Institutions": 3, "Uploaded Site": 3, "day": 3, "month": 3, "year": 3}, {"day_in_year": 41, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 42, "Title of preprint": 21, "Abstract": 21, "Number of Authors": 21, "Authors": 21, "Author(s) Institutions": 21, "Uploaded Site": 21, "day": 21, "month": 21, "year": 21}, {"day_in_year": 43, "Title of preprint": 14, "Abstract": 14, "Number of Authors": 14, "Authors": 14, "Author(s) Institutions": 14, "Uploaded Site": 14, "day": 14, "month": 14, "year": 14}, {"day_in_year": 44, "Title of preprint": 14, "Abstract": 14, "Number of Authors": 14, "Authors": 14, "Author(s) Institutions": 14, "Uploaded Site": 14, "day": 14, "month": 14, "year": 14}, {"day_in_year": 45, "Title of preprint": 6, "Abstract": 6, "Number of Authors": 6, "Authors": 6, "Author(s) Institutions": 6, "Uploaded Site": 6, "day": 6, "month": 6, "year": 6}, {"day_in_year": 46, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 48, "Title of preprint": 10, "Abstract": 10, "Number of Authors": 10, "Authors": 10, "Author(s) Institutions": 10, "Uploaded Site": 10, "day": 10, "month": 10, "year": 10}, {"day_in_year": 49, "Title of preprint": 20, "Abstract": 20, "Number of Authors": 20, "Authors": 20, "Author(s) Institutions": 20, "Uploaded Site": 20, "day": 20, "month": 20, "year": 20}, {"day_in_year": 50, "Title of preprint": 6, "Abstract": 6, "Number of Authors": 6, "Authors": 6, "Author(s) Institutions": 6, "Uploaded Site": 6, "day": 6, "month": 6, "year": 6}, {"day_in_year": 51, "Title of preprint": 28, "Abstract": 28, "Number of Authors": 28, "Authors": 28, "Author(s) Institutions": 28, "Uploaded Site": 28, "day": 28, "month": 28, "year": 28}, {"day_in_year": 52, "Title of preprint": 9, "Abstract": 9, "Number of Authors": 9, "Authors": 9, "Author(s) Institutions": 9, "Uploaded Site": 9, "day": 9, "month": 9, "year": 9}, {"day_in_year": 54, "Title of preprint": 33, "Abstract": 33, "Number of Authors": 33, "Authors": 33, "Author(s) Institutions": 33, "Uploaded Site": 33, "day": 33, "month": 33, "year": 33}, {"day_in_year": 55, "Title of preprint": 3, "Abstract": 3, "Number of Authors": 3, "Authors": 3, "Author(s) Institutions": 3, "Uploaded Site": 3, "day": 3, "month": 3, "year": 3}, {"day_in_year": 56, "Title of preprint": 26, "Abstract": 26, "Number of Authors": 26, "Authors": 26, "Author(s) Institutions": 26, "Uploaded Site": 26, "day": 26, "month": 26, "year": 26}, {"day_in_year": 57, "Title of preprint": 8, "Abstract": 8, "Number of Authors": 8, "Authors": 8, "Author(s) Institutions": 8, "Uploaded Site": 8, "day": 8, "month": 8, "year": 8}, {"day_in_year": 58, "Title of preprint": 25, "Abstract": 25, "Number of Authors": 25, "Authors": 25, "Author(s) Institutions": 25, "Uploaded Site": 25, "day": 25, "month": 25, "year": 25}, {"day_in_year": 59, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 60, "Title of preprint": 17, "Abstract": 17, "Number of Authors": 17, "Authors": 17, "Author(s) Institutions": 17, "Uploaded Site": 17, "day": 17, "month": 17, "year": 17}, {"day_in_year": 61, "Title of preprint": 4, "Abstract": 4, "Number of Authors": 4, "Authors": 4, "Author(s) Institutions": 4, "Uploaded Site": 4, "day": 4, "month": 4, "year": 4}, {"day_in_year": 62, "Title of preprint": 15, "Abstract": 15, "Number of Authors": 15, "Authors": 15, "Author(s) Institutions": 15, "Uploaded Site": 15, "day": 15, "month": 15, "year": 15}, {"day_in_year": 63, "Title of preprint": 28, "Abstract": 28, "Number of Authors": 28, "Authors": 28, "Author(s) Institutions": 28, "Uploaded Site": 28, "day": 28, "month": 28, "year": 28}, {"day_in_year": 64, "Title of preprint": 2, "Abstract": 2, "Number of Authors": 2, "Authors": 2, "Author(s) Institutions": 2, "Uploaded Site": 2, "day": 2, "month": 2, "year": 2}, {"day_in_year": 65, "Title of preprint": 5, "Abstract": 5, "Number of Authors": 5, "Authors": 5, "Author(s) Institutions": 5, "Uploaded Site": 5, "day": 5, "month": 5, "year": 5}, {"day_in_year": 66, "Title of preprint": 45, "Abstract": 45, "Number of Authors": 45, "Authors": 45, "Author(s) Institutions": 45, "Uploaded Site": 45, "day": 45, "month": 45, "year": 45}, {"day_in_year": 67, "Title of preprint": 9, "Abstract": 9, "Number of Authors": 9, "Authors": 9, "Author(s) Institutions": 9, "Uploaded Site": 9, "day": 9, "month": 9, "year": 9}, {"day_in_year": 68, "Title of preprint": 24, "Abstract": 24, "Number of Authors": 24, "Authors": 24, "Author(s) Institutions": 24, "Uploaded Site": 24, "day": 24, "month": 24, "year": 24}, {"day_in_year": 69, "Title of preprint": 3, "Abstract": 3, "Number of Authors": 3, "Authors": 3, "Author(s) Institutions": 3, "Uploaded Site": 3, "day": 3, "month": 3, "year": 3}, {"day_in_year": 70, "Title of preprint": 25, "Abstract": 25, "Number of Authors": 25, "Authors": 25, "Author(s) Institutions": 25, "Uploaded Site": 25, "day": 25, "month": 25, "year": 25}, {"day_in_year": 72, "Title of preprint": 18, "Abstract": 18, "Number of Authors": 18, "Authors": 18, "Author(s) Institutions": 18, "Uploaded Site": 18, "day": 18, "month": 18, "year": 18}, {"day_in_year": 73, "Title of preprint": 23, "Abstract": 23, "Number of Authors": 23, "Authors": 23, "Author(s) Institutions": 23, "Uploaded Site": 23, "day": 23, "month": 23, "year": 23}, {"day_in_year": 74, "Title of preprint": 12, "Abstract": 12, "Number of Authors": 12, "Authors": 12, "Author(s) Institutions": 12, "Uploaded Site": 12, "day": 12, "month": 12, "year": 12}, {"day_in_year": 75, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 76, "Title of preprint": 26, "Abstract": 26, "Number of Authors": 26, "Authors": 26, "Author(s) Institutions": 26, "Uploaded Site": 26, "day": 26, "month": 26, "year": 26}, {"day_in_year": 77, "Title of preprint": 39, "Abstract": 39, "Number of Authors": 39, "Authors": 39, "Author(s) Institutions": 39, "Uploaded Site": 39, "day": 39, "month": 39, "year": 39}, {"day_in_year": 78, "Title of preprint": 20, "Abstract": 20, "Number of Authors": 20, "Authors": 20, "Author(s) Institutions": 20, "Uploaded Site": 20, "day": 20, "month": 20, "year": 20}, {"day_in_year": 79, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 80, "Title of preprint": 63, "Abstract": 63, "Number of Authors": 63, "Authors": 63, "Author(s) Institutions": 63, "Uploaded Site": 63, "day": 63, "month": 63, "year": 63}, {"day_in_year": 81, "Title of preprint": 10, "Abstract": 10, "Number of Authors": 10, "Authors": 10, "Author(s) Institutions": 10, "Uploaded Site": 10, "day": 10, "month": 10, "year": 10}, {"day_in_year": 82, "Title of preprint": 2, "Abstract": 2, "Number of Authors": 2, "Authors": 2, "Author(s) Institutions": 2, "Uploaded Site": 2, "day": 2, "month": 2, "year": 2}, {"day_in_year": 83, "Title of preprint": 41, "Abstract": 41, "Number of Authors": 41, "Authors": 41, "Author(s) Institutions": 41, "Uploaded Site": 41, "day": 41, "month": 41, "year": 41}, {"day_in_year": 84, "Title of preprint": 22, "Abstract": 22, "Number of Authors": 22, "Authors": 22, "Author(s) Institutions": 22, "Uploaded Site": 22, "day": 22, "month": 22, "year": 22}, {"day_in_year": 85, "Title of preprint": 7, "Abstract": 7, "Number of Authors": 7, "Authors": 7, "Author(s) Institutions": 7, "Uploaded Site": 7, "day": 7, "month": 7, "year": 7}, {"day_in_year": 86, "Title of preprint": 26, "Abstract": 26, "Number of Authors": 26, "Authors": 26, "Author(s) Institutions": 26, "Uploaded Site": 26, "day": 26, "month": 26, "year": 26}, {"day_in_year": 87, "Title of preprint": 79, "Abstract": 79, "Number of Authors": 79, "Authors": 79, "Author(s) Institutions": 79, "Uploaded Site": 79, "day": 79, "month": 79, "year": 79}, {"day_in_year": 88, "Title of preprint": 12, "Abstract": 12, "Number of Authors": 12, "Authors": 12, "Author(s) Institutions": 12, "Uploaded Site": 12, "day": 12, "month": 12, "year": 12}, {"day_in_year": 89, "Title of preprint": 4, "Abstract": 4, "Number of Authors": 4, "Authors": 4, "Author(s) Institutions": 4, "Uploaded Site": 4, "day": 4, "month": 4, "year": 4}, {"day_in_year": 90, "Title of preprint": 113, "Abstract": 113, "Number of Authors": 113, "Authors": 113, "Author(s) Institutions": 113, "Uploaded Site": 113, "day": 113, "month": 113, "year": 113}, {"day_in_year": 91, "Title of preprint": 38, "Abstract": 38, "Number of Authors": 38, "Authors": 38, "Author(s) Institutions": 38, "Uploaded Site": 38, "day": 38, "month": 38, "year": 38}, {"day_in_year": 92, "Title of preprint": 37, "Abstract": 37, "Number of Authors": 37, "Authors": 37, "Author(s) Institutions": 37, "Uploaded Site": 37, "day": 37, "month": 37, "year": 37}, {"day_in_year": 93, "Title of preprint": 24, "Abstract": 24, "Number of Authors": 24, "Authors": 24, "Author(s) Institutions": 24, "Uploaded Site": 24, "day": 24, "month": 24, "year": 24}, {"day_in_year": 94, "Title of preprint": 32, "Abstract": 32, "Number of Authors": 32, "Authors": 32, "Author(s) Institutions": 32, "Uploaded Site": 32, "day": 32, "month": 32, "year": 32}, {"day_in_year": 95, "Title of preprint": 14, "Abstract": 14, "Number of Authors": 14, "Authors": 14, "Author(s) Institutions": 14, "Uploaded Site": 14, "day": 14, "month": 14, "year": 14}, {"day_in_year": 96, "Title of preprint": 20, "Abstract": 20, "Number of Authors": 20, "Authors": 20, "Author(s) Institutions": 20, "Uploaded Site": 20, "day": 20, "month": 20, "year": 20}, {"day_in_year": 97, "Title of preprint": 90, "Abstract": 90, "Number of Authors": 90, "Authors": 90, "Author(s) Institutions": 90, "Uploaded Site": 90, "day": 90, "month": 90, "year": 90}, {"day_in_year": 98, "Title of preprint": 65, "Abstract": 65, "Number of Authors": 65, "Authors": 65, "Author(s) Institutions": 65, "Uploaded Site": 65, "day": 65, "month": 65, "year": 65}, {"day_in_year": 99, "Title of preprint": 28, "Abstract": 28, "Number of Authors": 28, "Authors": 28, "Author(s) Institutions": 28, "Uploaded Site": 28, "day": 28, "month": 28, "year": 28}, {"day_in_year": 100, "Title of preprint": 21, "Abstract": 21, "Number of Authors": 21, "Authors": 21, "Author(s) Institutions": 21, "Uploaded Site": 21, "day": 21, "month": 21, "year": 21}, {"day_in_year": 101, "Title of preprint": 53, "Abstract": 53, "Number of Authors": 53, "Authors": 53, "Author(s) Institutions": 53, "Uploaded Site": 53, "day": 53, "month": 53, "year": 53}, {"day_in_year": 102, "Title of preprint": 122, "Abstract": 122, "Number of Authors": 122, "Authors": 122, "Author(s) Institutions": 122, "Uploaded Site": 122, "day": 122, "month": 122, "year": 122}, {"day_in_year": 103, "Title of preprint": 12, "Abstract": 12, "Number of Authors": 12, "Authors": 12, "Author(s) Institutions": 12, "Uploaded Site": 12, "day": 12, "month": 12, "year": 12}, {"day_in_year": 104, "Title of preprint": 3, "Abstract": 3, "Number of Authors": 3, "Authors": 3, "Author(s) Institutions": 3, "Uploaded Site": 3, "day": 3, "month": 3, "year": 3}, {"day_in_year": 105, "Title of preprint": 88, "Abstract": 88, "Number of Authors": 88, "Authors": 88, "Author(s) Institutions": 88, "Uploaded Site": 88, "day": 88, "month": 88, "year": 88}, {"day_in_year": 106, "Title of preprint": 50, "Abstract": 50, "Number of Authors": 50, "Authors": 50, "Author(s) Institutions": 50, "Uploaded Site": 50, "day": 50, "month": 50, "year": 50}, {"day_in_year": 107, "Title of preprint": 15, "Abstract": 15, "Number of Authors": 15, "Authors": 15, "Author(s) Institutions": 15, "Uploaded Site": 15, "day": 15, "month": 15, "year": 15}, {"day_in_year": 108, "Title of preprint": 132, "Abstract": 132, "Number of Authors": 132, "Authors": 132, "Author(s) Institutions": 132, "Uploaded Site": 132, "day": 132, "month": 132, "year": 132}, {"day_in_year": 109, "Title of preprint": 44, "Abstract": 44, "Number of Authors": 44, "Authors": 44, "Author(s) Institutions": 44, "Uploaded Site": 44, "day": 44, "month": 44, "year": 44}, {"day_in_year": 110, "Title of preprint": 13, "Abstract": 13, "Number of Authors": 13, "Authors": 13, "Author(s) Institutions": 13, "Uploaded Site": 13, "day": 13, "month": 13, "year": 13}, {"day_in_year": 111, "Title of preprint": 39, "Abstract": 39, "Number of Authors": 39, "Authors": 39, "Author(s) Institutions": 39, "Uploaded Site": 39, "day": 39, "month": 39, "year": 39}, {"day_in_year": 112, "Title of preprint": 38, "Abstract": 38, "Number of Authors": 38, "Authors": 38, "Author(s) Institutions": 38, "Uploaded Site": 38, "day": 38, "month": 38, "year": 38}, {"day_in_year": 113, "Title of preprint": 96, "Abstract": 96, "Number of Authors": 96, "Authors": 96, "Author(s) Institutions": 96, "Uploaded Site": 96, "day": 96, "month": 96, "year": 96}, {"day_in_year": 114, "Title of preprint": 61, "Abstract": 61, "Number of Authors": 61, "Authors": 61, "Author(s) Institutions": 61, "Uploaded Site": 61, "day": 61, "month": 61, "year": 61}, {"day_in_year": 115, "Title of preprint": 87, "Abstract": 87, "Number of Authors": 87, "Authors": 87, "Author(s) Institutions": 87, "Uploaded Site": 87, "day": 87, "month": 87, "year": 87}, {"day_in_year": 116, "Title of preprint": 42, "Abstract": 42, "Number of Authors": 42, "Authors": 42, "Author(s) Institutions": 42, "Uploaded Site": 42, "day": 42, "month": 42, "year": 42}, {"day_in_year": 117, "Title of preprint": 16, "Abstract": 16, "Number of Authors": 16, "Authors": 16, "Author(s) Institutions": 16, "Uploaded Site": 16, "day": 16, "month": 16, "year": 16}, {"day_in_year": 118, "Title of preprint": 47, "Abstract": 47, "Number of Authors": 47, "Authors": 47, "Author(s) Institutions": 47, "Uploaded Site": 47, "day": 47, "month": 47, "year": 47}, {"day_in_year": 119, "Title of preprint": 34, "Abstract": 34, "Number of Authors": 34, "Authors": 34, "Author(s) Institutions": 34, "Uploaded Site": 34, "day": 34, "month": 34, "year": 34}, {"day_in_year": 120, "Title of preprint": 112, "Abstract": 112, "Number of Authors": 112, "Authors": 112, "Author(s) Institutions": 112, "Uploaded Site": 112, "day": 112, "month": 112, "year": 112}, {"day_in_year": 121, "Title of preprint": 37, "Abstract": 37, "Number of Authors": 37, "Authors": 37, "Author(s) Institutions": 37, "Uploaded Site": 37, "day": 37, "month": 37, "year": 37}, {"day_in_year": 122, "Title of preprint": 98, "Abstract": 98, "Number of Authors": 98, "Authors": 98, "Author(s) Institutions": 98, "Uploaded Site": 98, "day": 98, "month": 98, "year": 98}, {"day_in_year": 123, "Title of preprint": 48, "Abstract": 48, "Number of Authors": 48, "Authors": 48, "Author(s) Institutions": 48, "Uploaded Site": 48, "day": 48, "month": 48, "year": 48}, {"day_in_year": 124, "Title of preprint": 36, "Abstract": 36, "Number of Authors": 36, "Authors": 36, "Author(s) Institutions": 36, "Uploaded Site": 36, "day": 36, "month": 36, "year": 36}, {"day_in_year": 125, "Title of preprint": 30, "Abstract": 30, "Number of Authors": 30, "Authors": 30, "Author(s) Institutions": 30, "Uploaded Site": 30, "day": 30, "month": 30, "year": 30}, {"day_in_year": 126, "Title of preprint": 111, "Abstract": 111, "Number of Authors": 111, "Authors": 111, "Author(s) Institutions": 111, "Uploaded Site": 111, "day": 111, "month": 111, "year": 111}, {"day_in_year": 127, "Title of preprint": 105, "Abstract": 105, "Number of Authors": 105, "Authors": 105, "Author(s) Institutions": 105, "Uploaded Site": 105, "day": 105, "month": 105, "year": 105}, {"day_in_year": 128, "Title of preprint": 24, "Abstract": 24, "Number of Authors": 24, "Authors": 24, "Author(s) Institutions": 24, "Uploaded Site": 24, "day": 24, "month": 24, "year": 24}, {"day_in_year": 129, "Title of preprint": 136, "Abstract": 136, "Number of Authors": 136, "Authors": 136, "Author(s) Institutions": 136, "Uploaded Site": 136, "day": 136, "month": 136, "year": 136}, {"day_in_year": 130, "Title of preprint": 44, "Abstract": 44, "Number of Authors": 44, "Authors": 44, "Author(s) Institutions": 44, "Uploaded Site": 44, "day": 44, "month": 44, "year": 44}, {"day_in_year": 131, "Title of preprint": 31, "Abstract": 31, "Number of Authors": 31, "Authors": 31, "Author(s) Institutions": 31, "Uploaded Site": 31, "day": 31, "month": 31, "year": 31}, {"day_in_year": 132, "Title of preprint": 78, "Abstract": 78, "Number of Authors": 78, "Authors": 78, "Author(s) Institutions": 78, "Uploaded Site": 78, "day": 78, "month": 78, "year": 78}, {"day_in_year": 133, "Title of preprint": 65, "Abstract": 65, "Number of Authors": 65, "Authors": 65, "Author(s) Institutions": 65, "Uploaded Site": 65, "day": 65, "month": 65, "year": 65}, {"day_in_year": 134, "Title of preprint": 66, "Abstract": 66, "Number of Authors": 66, "Authors": 66, "Author(s) Institutions": 66, "Uploaded Site": 66, "day": 66, "month": 66, "year": 66}, {"day_in_year": 135, "Title of preprint": 45, "Abstract": 45, "Number of Authors": 45, "Authors": 45, "Author(s) Institutions": 45, "Uploaded Site": 45, "day": 45, "month": 45, "year": 45}, {"day_in_year": 136, "Title of preprint": 66, "Abstract": 66, "Number of Authors": 66, "Authors": 66, "Author(s) Institutions": 66, "Uploaded Site": 66, "day": 66, "month": 66, "year": 66}, {"day_in_year": 137, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}, {"day_in_year": 268, "Title of preprint": 1, "Abstract": 1, "Number of Authors": 1, "Authors": 1, "Author(s) Institutions": 1, "Uploaded Site": 1, "day": 1, "month": 1, "year": 1}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;day_in_year&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">137</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Title of preprint</th>
+      <th>Abstract</th>
+      <th>Number of Authors</th>
+      <th>Authors</th>
+      <th>Author(s) Institutions</th>
+      <th>Uploaded Site</th>
+      <th>day</th>
+      <th>month</th>
+      <th>year</th>
+      <th>day_in_year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>MRI of the lungs in patients with COVID-19: cl...</td>
+      <td>Objective: To evaluate an applicability of lun...</td>
+      <td>16</td>
+      <td>['Yuriy Vasilev', 'Kristina Sergunova', 'Alexa...</td>
+      <td>{"Research and Practical Clinical Center for D...</td>
+      <td>medrxiv</td>
+      <td>16</td>
+      <td>5</td>
+      <td>2020</td>
+      <td>137</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h4> we can see above that after a certain day (about 137th day of the year) which is 16th May 2020</h4></p>
+<p><h4>Below we are going to plot the number of abstracts(research papers) published in the given months of 2020, we first filter out only months of 2020</h4></p>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">2020</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;month&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span><span class="o">.</span><span class="n">mark_area</span><span class="p">(</span>
+    <span class="n">line</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;darkblue&#39;</span><span class="p">},</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Gradient</span><span class="p">(</span>
+        <span class="n">gradient</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span>
+        <span class="n">stops</span><span class="o">=</span><span class="p">[</span><span class="n">alt</span><span class="o">.</span><span class="n">GradientStop</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+               <span class="n">alt</span><span class="o">.</span><span class="n">GradientStop</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)],</span>
+        <span class="n">x1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">x2</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">y1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">y2</span><span class="o">=</span><span class="mi">0</span>
+
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">),</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;Abstract&#39;</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Abstract Count published&quot;</span><span class="p">),</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">,</span><span class="s2">&quot;Abstract&quot;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-2c3224b9562a447ba2ec6632f59077ec"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-2c3224b9562a447ba2ec6632f59077ec") {
+      outputDiv = document.getElementById("altair-viz-2c3224b9562a447ba2ec6632f59077ec");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-24d5fb4a053b9770d737787d7a7cd045"}, "mark": {"type": "area", "color": {"gradient": "linear", "stops": [{"color": "white", "offset": 0}, {"color": "blue", "offset": 1}], "x1": 1, "x2": 1, "y1": 1, "y2": 0}, "line": {"color": "darkblue"}}, "encoding": {"tooltip": [{"type": "quantitative", "field": "month"}, {"type": "quantitative", "field": "Abstract"}], "x": {"type": "quantitative", "field": "month"}, "y": {"type": "quantitative", "field": "Abstract", "title": "Abstract Count published"}}, "selection": {"selector014": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-24d5fb4a053b9770d737787d7a7cd045": [{"month": 1, "Title of preprint": 38, "Abstract": 38, "Number of Authors": 38, "Authors": 38, "Author(s) Institutions": 38, "Uploaded Site": 38, "day": 38, "year": 38, "day_in_year": 38}, {"month": 2, "Title of preprint": 284, "Abstract": 284, "Number of Authors": 284, "Authors": 284, "Author(s) Institutions": 284, "Uploaded Site": 284, "day": 284, "year": 284, "day_in_year": 284}, {"month": 3, "Title of preprint": 717, "Abstract": 717, "Number of Authors": 717, "Authors": 717, "Author(s) Institutions": 717, "Uploaded Site": 717, "day": 717, "year": 717, "day_in_year": 717}, {"month": 4, "Title of preprint": 1472, "Abstract": 1472, "Number of Authors": 1472, "Authors": 1472, "Author(s) Institutions": 1472, "Uploaded Site": 1472, "day": 1472, "year": 1472, "day_in_year": 1472}, {"month": 5, "Title of preprint": 984, "Abstract": 984, "Number of Authors": 984, "Authors": 984, "Author(s) Institutions": 984, "Uploaded Site": 984, "day": 984, "year": 984, "day_in_year": 984}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4>Over here we will import nltk stopwords and remove the stopwords from the abstract and I have made a function for it, next I have done is as follows:
+<ul><li> I creat a function(get_top_n_words) for doing all in one </li>
+<li>it first removes stopwords using Countvectorerizer</li>
+<li>our function which takes n as input is the top n word frequencies we want</li>
+<li>using vecotor transform and bag of words we get the frequencies and the words of the whole <b>abstract column</b> which we will input as the agrument <b>corpus</b></li>
+<li> we then sort it according to the most number of frequencies and return the top n words and their frequencies in a <b>list of tuples</b></li>
+</ul>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span> 
+<span class="n">stop_words</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">removeSW</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">word_tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+    
+    <span class="n">filtered_sentence</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">word_tokens</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span> 
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filtered_sentence</span><span class="p">)</span>
+
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Abstract&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Abstract&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">removeSW</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="k">def</span> <span class="nf">get_top_n_words</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">stop_words</span> <span class="o">=</span> <span class="s1">&#39;english&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+    <span class="n">bag_of_words</span> <span class="o">=</span> <span class="n">vec</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+    <span class="n">sum_words</span> <span class="o">=</span> <span class="n">bag_of_words</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> 
+    <span class="n">words_freq</span> <span class="o">=</span> <span class="p">[(</span><span class="n">word</span><span class="p">,</span> <span class="n">sum_words</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">])</span> <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">vec</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+    <span class="n">words_freq</span> <span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">words_freq</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">words_freq</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4>Lets get our unigrams of the abstract column and the title column using this function </h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">unigrams</span><span class="o">=</span><span class="n">get_top_n_words</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Abstract&quot;</span><span class="p">],</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">unigrams_title</span><span class="o">=</span><span class="n">get_top_n_words</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Title of preprint&quot;</span><span class="p">],</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">unigrams</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(&#39;19&#39;, 9637),
+ (&#39;covid&#39;, 9419),
+ (&#39;sars&#39;, 5431),
+ (&#39;cov&#39;, 5304),
+ (&#39;patients&#39;, 4950),
+ (&#39;cases&#39;, 3385),
+ (&#39;data&#39;, 2727),
+ (&#39;disease&#39;, 2597),
+ (&#39;infection&#39;, 2334),
+ (&#39;model&#39;, 2211),
+ (&#39;coronavirus&#39;, 2189),
+ (&#39;results&#39;, 2181),
+ (&#39;number&#39;, 2127),
+ (&#39;study&#39;, 1979),
+ (&#39;2020&#39;, 1972),
+ (&#39;2019&#39;, 1848),
+ (&#39;health&#39;, 1808),
+ (&#39;pandemic&#39;, 1797),
+ (&#39;time&#39;, 1698),
+ (&#39;epidemic&#39;, 1679)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">unigrams_title</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[(&#39;19&#39;, 2135),
+ (&#39;covid&#39;, 2128),
+ (&#39;sars&#39;, 945),
+ (&#39;cov&#39;, 898),
+ (&#39;coronavirus&#39;, 491),
+ (&#39;patients&#39;, 397),
+ (&#39;2019&#39;, 359),
+ (&#39;analysis&#39;, 345),
+ (&#39;study&#39;, 272),
+ (&#39;pandemic&#39;, 269),
+ (&#39;infection&#39;, 267),
+ (&#39;china&#39;, 264),
+ (&#39;disease&#39;, 257),
+ (&#39;novel&#39;, 256),
+ (&#39;epidemic&#39;, 242),
+ (&#39;clinical&#39;, 227),
+ (&#39;model&#39;, 226),
+ (&#39;based&#39;, 214),
+ (&#39;outbreak&#39;, 209),
+ (&#39;using&#39;, 198)]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4> Yes! I know both the list of tuples looks very much same since many of the title and abstract words are column, now lets get down in making a seperate dataframe and join this 2 list of tuples as rows and their values as column ,also a column for <b>type</b> indicates that wether it is abstract or title</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:[],</span><span class="s2">&quot;count&quot;</span><span class="p">:[],</span><span class="s2">&quot;type&quot;</span><span class="p">:[]}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">unigrams</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Abstract&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">unigrams_title</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Title&quot;</span><span class="p">)</span>
+<span class="n">count_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4> We plot!!</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">source</span> <span class="o">=</span> <span class="n">count_df</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">,</span><span class="s2">&quot;count&quot;</span><span class="p">],</span>
+    <span class="n">column</span><span class="o">=</span><span class="s1">&#39;type&#39;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;word&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;type&#39;</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-a88c8385a6d941269a99027ce069981d"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-a88c8385a6d941269a99027ce069981d") {
+      outputDiv = document.getElementById("altair-viz-a88c8385a6d941269a99027ce069981d");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-8648d6bc46881488f6bd3188235b3ca3"}, "mark": "bar", "encoding": {"color": {"type": "nominal", "field": "type"}, "column": {"type": "nominal", "field": "type"}, "tooltip": [{"type": "nominal", "field": "word"}, {"type": "quantitative", "field": "count"}], "x": {"type": "nominal", "field": "word"}, "y": {"type": "quantitative", "field": "count"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-8648d6bc46881488f6bd3188235b3ca3": [{"word": "19", "count": 9637, "type": "Abstract"}, {"word": "covid", "count": 9419, "type": "Abstract"}, {"word": "sars", "count": 5431, "type": "Abstract"}, {"word": "cov", "count": 5304, "type": "Abstract"}, {"word": "patients", "count": 4950, "type": "Abstract"}, {"word": "cases", "count": 3385, "type": "Abstract"}, {"word": "data", "count": 2727, "type": "Abstract"}, {"word": "disease", "count": 2597, "type": "Abstract"}, {"word": "infection", "count": 2334, "type": "Abstract"}, {"word": "model", "count": 2211, "type": "Abstract"}, {"word": "coronavirus", "count": 2189, "type": "Abstract"}, {"word": "results", "count": 2181, "type": "Abstract"}, {"word": "number", "count": 2127, "type": "Abstract"}, {"word": "study", "count": 1979, "type": "Abstract"}, {"word": "2020", "count": 1972, "type": "Abstract"}, {"word": "2019", "count": 1848, "type": "Abstract"}, {"word": "health", "count": 1808, "type": "Abstract"}, {"word": "pandemic", "count": 1797, "type": "Abstract"}, {"word": "time", "count": 1698, "type": "Abstract"}, {"word": "epidemic", "count": 1679, "type": "Abstract"}, {"word": "19", "count": 2135, "type": "Title"}, {"word": "covid", "count": 2128, "type": "Title"}, {"word": "sars", "count": 945, "type": "Title"}, {"word": "cov", "count": 898, "type": "Title"}, {"word": "coronavirus", "count": 491, "type": "Title"}, {"word": "patients", "count": 397, "type": "Title"}, {"word": "2019", "count": 359, "type": "Title"}, {"word": "analysis", "count": 345, "type": "Title"}, {"word": "study", "count": 272, "type": "Title"}, {"word": "pandemic", "count": 269, "type": "Title"}, {"word": "infection", "count": 267, "type": "Title"}, {"word": "china", "count": 264, "type": "Title"}, {"word": "disease", "count": 257, "type": "Title"}, {"word": "novel", "count": 256, "type": "Title"}, {"word": "epidemic", "count": 242, "type": "Title"}, {"word": "clinical", "count": 227, "type": "Title"}, {"word": "model", "count": 226, "type": "Title"}, {"word": "based", "count": 214, "type": "Title"}, {"word": "outbreak", "count": 209, "type": "Title"}, {"word": "using", "count": 198, "type": "Title"}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h4> Now we modify the function before and create a new function called<b> get_top_gram</b> It takes one more argument called grams, which will be the number of grams we want, bigram trigram etc and after that I will plot the bigram as similarly as the unigrams, and then I plot the pentagrams!!<h4>&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_top_gram</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span><span class="n">grams</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="n">grams</span><span class="p">,</span><span class="n">stop_words</span> <span class="o">=</span> <span class="s1">&#39;english&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+    <span class="n">bag_of_words</span> <span class="o">=</span> <span class="n">vec</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+    <span class="n">sum_words</span> <span class="o">=</span> <span class="n">bag_of_words</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> 
+    <span class="n">words_freq</span> <span class="o">=</span> <span class="p">[(</span><span class="n">word</span><span class="p">,</span> <span class="n">sum_words</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">])</span> <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">vec</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+    <span class="n">words_freq</span> <span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">words_freq</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">words_freq</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bigrams</span><span class="o">=</span><span class="n">get_top_gram</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Abstract&quot;</span><span class="p">],(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">bigrams_title</span><span class="o">=</span><span class="n">get_top_gram</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Title of preprint&quot;</span><span class="p">],(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">d</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:[],</span><span class="s2">&quot;count&quot;</span><span class="p">:[],</span><span class="s2">&quot;type&quot;</span><span class="p">:[]}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bigrams</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Abstract&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bigrams_title</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Title&quot;</span><span class="p">)</span>
+<span class="n">count_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">source</span> <span class="o">=</span> <span class="n">count_df</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">,</span><span class="s2">&quot;count&quot;</span><span class="p">],</span>
+    <span class="n">column</span><span class="o">=</span><span class="s1">&#39;type&#39;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;word&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;type&#39;</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-5e923a46ee4944b699b2640156373458"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-5e923a46ee4944b699b2640156373458") {
+      outputDiv = document.getElementById("altair-viz-5e923a46ee4944b699b2640156373458");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-13ff59b061af7091b64656cc6f98eb04"}, "mark": "bar", "encoding": {"color": {"type": "nominal", "field": "type"}, "column": {"type": "nominal", "field": "type"}, "tooltip": [{"type": "nominal", "field": "word"}, {"type": "quantitative", "field": "count"}], "x": {"type": "nominal", "field": "word"}, "y": {"type": "quantitative", "field": "count"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-13ff59b061af7091b64656cc6f98eb04": [{"word": "covid 19", "count": 9236, "type": "Abstract"}, {"word": "sars cov", "count": 4989, "type": "Abstract"}, {"word": "95 ci", "count": 1028, "type": "Abstract"}, {"word": "19 patients", "count": 850, "type": "Abstract"}, {"word": "19 pandemic", "count": 661, "type": "Abstract"}, {"word": "coronavirus disease", "count": 642, "type": "Abstract"}, {"word": "social distancing", "count": 617, "type": "Abstract"}, {"word": "public health", "count": 584, "type": "Abstract"}, {"word": "2019 ncov", "count": 582, "type": "Abstract"}, {"word": "novel coronavirus", "count": 563, "type": "Abstract"}, {"word": "disease 2019", "count": 530, "type": "Abstract"}, {"word": "2019 covid", "count": 511, "type": "Abstract"}, {"word": "acute respiratory", "count": 490, "type": "Abstract"}, {"word": "coronavirus sars", "count": 475, "type": "Abstract"}, {"word": "cov infection", "count": 474, "type": "Abstract"}, {"word": "confirmed cases", "count": 434, "type": "Abstract"}, {"word": "respiratory syndrome", "count": 432, "type": "Abstract"}, {"word": "19 cases", "count": 417, "type": "Abstract"}, {"word": "severe acute", "count": 396, "type": "Abstract"}, {"word": "rt pcr", "count": 348, "type": "Abstract"}, {"word": "covid 19", "count": 2103, "type": "Title"}, {"word": "sars cov", "count": 884, "type": "Title"}, {"word": "novel coronavirus", "count": 199, "type": "Title"}, {"word": "19 pandemic", "count": 191, "type": "Title"}, {"word": "coronavirus disease", "count": 139, "type": "Title"}, {"word": "19 patients", "count": 136, "type": "Title"}, {"word": "2019 ncov", "count": 128, "type": "Title"}, {"word": "19 outbreak", "count": 106, "type": "Title"}, {"word": "19 epidemic", "count": 105, "type": "Title"}, {"word": "disease 2019", "count": 105, "type": "Title"}, {"word": "systematic review", "count": 92, "type": "Title"}, {"word": "cov infection", "count": 89, "type": "Title"}, {"word": "2019 novel", "count": 84, "type": "Title"}, {"word": "patients covid", "count": 83, "type": "Title"}, {"word": "19 infection", "count": 76, "type": "Title"}, {"word": "meta analysis", "count": 74, "type": "Title"}, {"word": "united states", "count": 68, "type": "Title"}, {"word": "social distancing", "count": 65, "type": "Title"}, {"word": "clinical characteristics", "count": 57, "type": "Title"}, {"word": "wuhan china", "count": 56, "type": "Title"}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fivegrams</span><span class="o">=</span><span class="n">get_top_gram</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Abstract&quot;</span><span class="p">],(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">fivegrams_title</span><span class="o">=</span><span class="n">get_top_gram</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Title of preprint&quot;</span><span class="p">],(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">d</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:[],</span><span class="s2">&quot;count&quot;</span><span class="p">:[],</span><span class="s2">&quot;type&quot;</span><span class="p">:[]}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fivegrams</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Abstract&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fivegrams_title</span><span class="p">:</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Title&quot;</span><span class="p">)</span>
+<span class="n">count_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">source</span> <span class="o">=</span> <span class="n">count_df</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;word&quot;</span><span class="p">,</span><span class="s2">&quot;count&quot;</span><span class="p">],</span>
+    <span class="n">column</span><span class="o">=</span><span class="s1">&#39;type&#39;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;word&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;type&#39;</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-3c78874639ff4a97a4d6e5d510887197"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-3c78874639ff4a97a4d6e5d510887197") {
+      outputDiv = document.getElementById("altair-viz-3c78874639ff4a97a4d6e5d510887197");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-aacc8a0e9a12005df766431618eb68d6"}, "mark": "bar", "encoding": {"color": {"type": "nominal", "field": "type"}, "column": {"type": "nominal", "field": "type"}, "tooltip": [{"type": "nominal", "field": "word"}, {"type": "quantitative", "field": "count"}], "x": {"type": "nominal", "field": "word"}, "y": {"type": "quantitative", "field": "count"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-aacc8a0e9a12005df766431618eb68d6": [{"word": "coronavirus disease 2019 covid 19", "count": 440, "type": "Abstract"}, {"word": "severe acute respiratory syndrome coronavirus", "count": 291, "type": "Abstract"}, {"word": "acute respiratory syndrome coronavirus sars", "count": 275, "type": "Abstract"}, {"word": "respiratory syndrome coronavirus sars cov", "count": 271, "type": "Abstract"}, {"word": "caused severe acute respiratory syndrome", "count": 71, "type": "Abstract"}, {"word": "disease 2019 covid 19 caused", "count": 48, "type": "Abstract"}, {"word": "disease 2019 covid 19 pandemic", "count": 48, "type": "Abstract"}, {"word": "novel coronavirus disease covid 19", "count": 47, "type": "Abstract"}, {"word": "2019 novel coronavirus 2019 ncov", "count": 43, "type": "Abstract"}, {"word": "severe acute respiratory syndrome sars", "count": 40, "type": "Abstract"}, {"word": "corona virus disease 2019 covid", "count": 38, "type": "Abstract"}, {"word": "background coronavirus disease 2019 covid", "count": 38, "type": "Abstract"}, {"word": "virus disease 2019 covid 19", "count": 37, "type": "Abstract"}, {"word": "outbreak coronavirus disease 2019 covid", "count": 37, "type": "Abstract"}, {"word": "covid 19 caused severe acute", "count": 34, "type": "Abstract"}, {"word": "19 caused severe acute respiratory", "count": 34, "type": "Abstract"}, {"word": "acute respiratory distress syndrome ards", "count": 31, "type": "Abstract"}, {"word": "covid 19 caused sars cov", "count": 30, "type": "Abstract"}, {"word": "public health emergency international concern", "count": 30, "type": "Abstract"}, {"word": "novel coronavirus disease 2019 covid", "count": 27, "type": "Abstract"}, {"word": "coronavirus disease 2019 covid 19", "count": 49, "type": "Title"}, {"word": "severe acute respiratory syndrome coronavirus", "count": 23, "type": "Title"}, {"word": "acute respiratory syndrome coronavirus sars", "count": 19, "type": "Title"}, {"word": "respiratory syndrome coronavirus sars cov", "count": 19, "type": "Title"}, {"word": "covid 19 systematic review meta", "count": 12, "type": "Title"}, {"word": "19 systematic review meta analysis", "count": 12, "type": "Title"}, {"word": "patients coronavirus disease 2019 covid", "count": 11, "type": "Title"}, {"word": "novel coronavirus disease covid 19", "count": 9, "type": "Title"}, {"word": "case fatality rate covid 19", "count": 8, "type": "Title"}, {"word": "2019 novel coronavirus 2019 ncov", "count": 8, "type": "Title"}, {"word": "covid 19 living systematic review", "count": 6, "type": "Title"}, {"word": "2019 novel coronavirus covid 19", "count": 6, "type": "Title"}, {"word": "novel coronavirus 2019 ncov outbreak", "count": 6, "type": "Title"}, {"word": "reverse transcription loop mediated isothermal", "count": 5, "type": "Title"}, {"word": "transcription loop mediated isothermal amplification", "count": 5, "type": "Title"}, {"word": "disease 2019 covid 19 patients", "count": 5, "type": "Title"}, {"word": "binding sars cov spike protein", "count": 4, "type": "Title"}, {"word": "early phase covid 19 epidemic", "count": 4, "type": "Title"}, {"word": "patients systematic review meta analysis", "count": 4, "type": "Title"}, {"word": "coronavirus disease covid 19 pandemic", "count": 4, "type": "Title"}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h4> Now lets get onto the authors and the Universities!!</h4></p>
+<p> Here I use json to extract the dictionary present in the column <b>Author(s) Institutions</b></p>
+<p> after that I show the length of the set and list created, basically the set contains the number of unique Institutions and the list contains everytime the Institution is mentioned in the dataframe, we will use it ahead</p>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered celltag_outputPrepend">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="n">myset</span><span class="o">=</span><span class="nb">set</span><span class="p">()</span>
+<span class="n">mylist</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Author(s) Institutions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="n">l</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;Author(s) Institutions&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+        <span class="n">myset</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">mylist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">myset</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>9134</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>12343</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h4>Another function phew!!!, well this is quite simple we use the list and count how many times each intistute has appeared and then a dictionary example ({"university":10})</h4></p>
+<p> basically what we want to do is that the frequency represents how many times the institution has published a paper since its occurence in the dataframe in each row is a count for its publications!!!</p>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">CountFrequency</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span> 
+      
+  
+   <span class="n">count</span> <span class="o">=</span> <span class="p">{}</span> 
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">:</span> 
+       <span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+       
+   
+    
+   <span class="k">return</span> <span class="n">count</span> 
+<span class="n">frequency</span><span class="o">=</span><span class="n">CountFrequency</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
+  
+<span class="n">d</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;UNI&quot;</span><span class="p">:[],</span><span class="s2">&quot;Publishes&quot;</span><span class="p">:[]}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">frequency</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;UNI&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;Publishes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frequency</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">uni_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">uni_df</span><span class="o">=</span><span class="n">uni_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Publishes&quot;</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">uni_df</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">uni_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">UNI</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">:</span>
+        <span class="n">uni_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">source</span> <span class="o">=</span> <span class="n">uni_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">50</span><span class="p">,:]</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Publishes&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;UNI&quot;</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Publishes&quot;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-77459c668da7453781da249ff37f2615"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-77459c668da7453781da249ff37f2615") {
+      outputDiv = document.getElementById("altair-viz-77459c668da7453781da249ff37f2615");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-ca8aa88514c8098f8b16e2687174ab6f"}, "mark": "bar", "encoding": {"tooltip": [{"type": "quantitative", "field": "Publishes"}], "x": {"type": "quantitative", "field": "Publishes"}, "y": {"type": "nominal", "field": "UNI"}}, "height": 700, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-ca8aa88514c8098f8b16e2687174ab6f": [{"UNI": "University of Oxford", "Publishes": 61}, {"UNI": "Stanford University", "Publishes": 36}, {"UNI": "The University of Hong Kong", "Publishes": 35}, {"UNI": "University of Washington", "Publishes": 33}, {"UNI": "Fudan University", "Publishes": 29}, {"UNI": "Imperial College London", "Publishes": 28}, {"UNI": "University of Cambridge", "Publishes": 26}, {"UNI": "London School of Hygiene and Tropical Medicine", "Publishes": 25}, {"UNI": "University of Toronto", "Publishes": 22}, {"UNI": "Yale University", "Publishes": 22}, {"UNI": "University of Michigan", "Publishes": 22}, {"UNI": "Columbia University", "Publishes": 22}, {"UNI": "Harvard T.H. Chan School of Public Health", "Publishes": 21}, {"UNI": "Tsinghua University", "Publishes": 21}, {"UNI": "University of Texas at Austin", "Publishes": 20}, {"UNI": "University College London", "Publishes": 19}, {"UNI": "Zhongnan Hospital of Wuhan University", "Publishes": 19}, {"UNI": "Icahn School of Medicine at Mount Sinai", "Publishes": 19}, {"UNI": "Harvard University", "Publishes": 19}, {"UNI": "King's College London", "Publishes": 17}, {"UNI": "Renmin Hospital of Wuhan University", "Publishes": 17}, {"UNI": "Emory University", "Publishes": 17}, {"UNI": "London School of Hygiene & Tropical Medicine", "Publishes": 17}, {"UNI": "Institut Pasteur", "Publishes": 17}, {"UNI": "University of Pennsylvania", "Publishes": 16}, {"UNI": "Massachusetts General Hospital", "Publishes": 16}, {"UNI": "Harvard Medical School", "Publishes": 16}, {"UNI": "The University of Texas at Austin", "Publishes": 16}, {"UNI": "Princeton University", "Publishes": 16}, {"UNI": "Huazhong University of Science and Technology", "Publishes": 15}, {"UNI": "Peking University", "Publishes": 15}, {"UNI": "City University of Hong Kong", "Publishes": 14}, {"UNI": "University of Pittsburgh", "Publishes": 14}, {"UNI": "Sun Yat-sen University", "Publishes": 14}, {"UNI": "Xi'an Jiaotong University", "Publishes": 14}, {"UNI": "Georgia State University School of Public Health", "Publishes": 14}, {"UNI": "Beijing Normal University", "Publishes": 14}, {"UNI": "University of California, Berkeley", "Publishes": 13}, {"UNI": "Massachusetts Institute of Technology", "Publishes": 13}, {"UNI": "Johns Hopkins University", "Publishes": 13}, {"UNI": "University of Liverpool", "Publishes": 13}, {"UNI": "Arizona State University", "Publishes": 13}, {"UNI": "Fred Hutchinson Cancer Research Center", "Publishes": 12}, {"UNI": "Lanzhou University", "Publishes": 12}, {"UNI": "University of California, San Francisco", "Publishes": 12}, {"UNI": "The Chinese University of Hong Kong", "Publishes": 12}, {"UNI": "Xiamen University", "Publishes": 12}, {"UNI": "University of North Carolina at Chapel Hill", "Publishes": 11}, {"UNI": "University of Edinburgh", "Publishes": 11}, {"UNI": "Wuhan Institute of Virology, Chinese Academy of Sciences", "Publishes": 11}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4> Voila! the graph above shows how many publications done by the institutions(here I plotted only the top 50 )<p>HOVER!!! and we find out <b> Oxford University</b> has published 61 times!!! 
+</p>
+<p>Now, lets check for the authors , below I used the previous dictionary of frequencies we outputed and change the values to list of values example
+<p>{"uni":1}===&gt;{"uni":[1,0]}</p>
+here we add the 0 to all as we are going to store the authors count for this value!!!
+</p>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">frequency</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+   <span class="n">frequency</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">frequency</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4>See the name of the institue is given and also the value with it are the authors number! which we did not consider above , well now we are!!</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Author(s) Institutions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0    {&#34;Research and Practical Clinical Center for D...
+1    {&#34;Michigan State University&#34;: 9, &#34;University o...
+2    {&#34;University of Patras&#34;: 2, &#34;Department of Phy...
+3    {&#34;Northwell Health Laboratories&#34;: 5, &#34;Northwel...
+4    {&#34;Shanghai Jiao Tong University&#34;: 11, &#34;Fudan U...
+Name: Author(s) Institutions, dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4> We now again use json to get the values of author institution column but we will extract the names of the Uni as a key for our dictionary and will upadte the auhors value to it</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mylist</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Author(s) Institutions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="n">l</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;Author(s) Institutions&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+        <span class="n">frequency</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">frequency</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;Author(s) Institutions&quot;</span><span class="p">])[</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+<span class="n">d</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;UNI&quot;</span><span class="p">:[],</span><span class="s2">&quot;AuthorCount&quot;</span><span class="p">:[]}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">frequency</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;UNI&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;AuthorCount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frequency</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">uni_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">uni_df</span><span class="o">=</span><span class="n">uni_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AuthorCount&quot;</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">uni_df</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">uni_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">UNI</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">:</span>
+        <span class="n">uni_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4>We did the same procdeure and created a new dataframe for university and their authors count!</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">uni_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>UNI</th>
+      <th>AuthorCount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1402</th>
+      <td>Icahn School of Medicine at Mount Sinai</td>
+      <td>236</td>
+    </tr>
+    <tr>
+      <th>450</th>
+      <td>University of Oxford</td>
+      <td>183</td>
+    </tr>
+    <tr>
+      <th>2716</th>
+      <td>Centers for Disease Control and Prevention</td>
+      <td>180</td>
+    </tr>
+    <tr>
+      <th>784</th>
+      <td>Imperial College London</td>
+      <td>172</td>
+    </tr>
+    <tr>
+      <th>485</th>
+      <td>Stanford University</td>
+      <td>160</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5354</th>
+      <td>National Institute of Advanced Industrial Scie...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5353</th>
+      <td>National Institute for Infectious Diseases</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5352</th>
+      <td>Nagahama Institute of Bioscience and Technology</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2214</th>
+      <td>6School of Medicine, Shiraz University of Medi...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9133</th>
+      <td>Loyola University of Chicago Stritch School of...</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>9107 rows × 2 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4> Finally we plot it!!, and hovering over the data we can see<b> Icahn School of Medicine</b> has the highest amount of authors who have published for covid-19 around 470</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">source</span> <span class="o">=</span> <span class="n">uni_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">50</span><span class="p">,:]</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;AuthorCount&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;UNI&quot;</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AuthorCount&quot;</span><span class="p">,</span><span class="s2">&quot;UNI&quot;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-612a8ed0619142d7ae79a3e39276a5fb"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-612a8ed0619142d7ae79a3e39276a5fb") {
+      outputDiv = document.getElementById("altair-viz-612a8ed0619142d7ae79a3e39276a5fb");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-3c004852bed79346527943f88c428806"}, "mark": "bar", "encoding": {"tooltip": [{"type": "quantitative", "field": "AuthorCount"}, {"type": "nominal", "field": "UNI"}], "x": {"type": "quantitative", "field": "AuthorCount"}, "y": {"type": "nominal", "field": "UNI"}}, "height": 700, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-3c004852bed79346527943f88c428806": [{"UNI": "Icahn School of Medicine at Mount Sinai", "AuthorCount": 236}, {"UNI": "University of Oxford", "AuthorCount": 183}, {"UNI": "Centers for Disease Control and Prevention", "AuthorCount": 180}, {"UNI": "Imperial College London", "AuthorCount": 172}, {"UNI": "Stanford University", "AuthorCount": 160}, {"UNI": "University of Washington", "AuthorCount": 150}, {"UNI": "Emory University", "AuthorCount": 130}, {"UNI": "University of California, San Francisco", "AuthorCount": 123}, {"UNI": "Institut Pasteur", "AuthorCount": 122}, {"UNI": "King's College London", "AuthorCount": 120}, {"UNI": "Zhongnan Hospital of Wuhan University", "AuthorCount": 115}, {"UNI": "UCSF", "AuthorCount": 114}, {"UNI": "Fudan University", "AuthorCount": 113}, {"UNI": "The University of Hong Kong", "AuthorCount": 111}, {"UNI": "University of Michigan", "AuthorCount": 110}, {"UNI": "London School of Hygiene and Tropical Medicine", "AuthorCount": 100}, {"UNI": "Yale School of Medicine", "AuthorCount": 99}, {"UNI": "Xiamen University", "AuthorCount": 98}, {"UNI": "Renmin Hospital of Wuhan University", "AuthorCount": 95}, {"UNI": "Columbia University", "AuthorCount": 88}, {"UNI": "University of Cambridge", "AuthorCount": 72}, {"UNI": "London School of Hygiene & Tropical Medicine", "AuthorCount": 70}, {"UNI": "University of Pennsylvania", "AuthorCount": 69}, {"UNI": "Wuhan Union Hospital", "AuthorCount": 67}, {"UNI": "Harvard T.H. Chan School of Public Health", "AuthorCount": 66}, {"UNI": "University of Liverpool", "AuthorCount": 65}, {"UNI": "Yale School of Public Health", "AuthorCount": 63}, {"UNI": "Hokkaido University", "AuthorCount": 60}, {"UNI": "Tsinghua University", "AuthorCount": 59}, {"UNI": "The Francis Crick Institute", "AuthorCount": 57}, {"UNI": "Beijing Institute of Biotechnology", "AuthorCount": 57}, {"UNI": "Yale University", "AuthorCount": 56}, {"UNI": "Fred Hutchinson Cancer Research Center", "AuthorCount": 56}, {"UNI": "Vanderbilt University Medical Center", "AuthorCount": 54}, {"UNI": "University of North Carolina at Chapel Hill", "AuthorCount": 54}, {"UNI": "University College London", "AuthorCount": 51}, {"UNI": "Icahn School of Medicine at Mount Sinai, New York, NY, USA", "AuthorCount": 51}, {"UNI": "Stanford University School of Medicine", "AuthorCount": 50}, {"UNI": "Weill Cornell Medicine", "AuthorCount": 50}, {"UNI": "Institute of Medical Biology, Chinese Academy of Medical Sciences and Peking Union Medical College", "AuthorCount": 50}, {"UNI": "NIAID", "AuthorCount": 50}, {"UNI": "Xi'an Jiaotong University", "AuthorCount": 49}, {"UNI": "Union Hospital, Tongji Medical College, Huazhong University of Science and Technology", "AuthorCount": 49}, {"UNI": "Mayo Clinic", "AuthorCount": 49}, {"UNI": "The Scripps Research Institute", "AuthorCount": 46}, {"UNI": "National Institute of Infectious Diseases", "AuthorCount": 46}, {"UNI": "Sun Yat-sen University", "AuthorCount": 46}, {"UNI": "Westlake University", "AuthorCount": 46}, {"UNI": "Huazhong University of Science and Technology", "AuthorCount": 44}, {"UNI": "University of Utah", "AuthorCount": 44}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1>Thank You!</h1>
+</div>
+</div>
+</div>
+&lt;/div&gt;
+ 
+
+</h4></h4></p></div></div></div></h4></div></div></div></div>
+
+
+  </div><a class="u-url" href="/DataScienceBlog/2020/05/23/copy_preprint.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/DataScienceBlog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/DataScienceBlog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/DataScienceBlog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Here You can see my projects and their JupyterNotebook :D</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/DataScienceBlog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/DataScienceBlog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

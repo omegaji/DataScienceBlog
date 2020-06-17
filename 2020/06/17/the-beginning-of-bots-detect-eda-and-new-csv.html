@@ -1,0 +1,2806 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Bots Detection the beginning | DataScienceProjects with OM</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Bots Detection the beginning" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Here You can see my projects and their JupyterNotebook :D" />
+<meta property="og:description" content="Here You can see my projects and their JupyterNotebook :D" />
+<link rel="canonical" href="https://omegaji.github.io/DataScienceBlog/2020/06/17/the-beginning-of-bots-detect-eda-and-new-csv.html" />
+<meta property="og:url" content="https://omegaji.github.io/DataScienceBlog/2020/06/17/the-beginning-of-bots-detect-eda-and-new-csv.html" />
+<meta property="og:site_name" content="DataScienceProjects with OM" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-17T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Here You can see my projects and their JupyterNotebook :D","@type":"BlogPosting","headline":"Bots Detection the beginning","dateModified":"2020-06-17T00:00:00-05:00","datePublished":"2020-06-17T00:00:00-05:00","url":"https://omegaji.github.io/DataScienceBlog/2020/06/17/the-beginning-of-bots-detect-eda-and-new-csv.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://omegaji.github.io/DataScienceBlog/2020/06/17/the-beginning-of-bots-detect-eda-and-new-csv.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/DataScienceBlog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://omegaji.github.io/DataScienceBlog/feed.xml" title="DataScienceProjects with OM" /><link rel="shortcut icon" type="image/x-icon" href="/DataScienceBlog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Bots Detection the beginning | DataScienceProjects with OM</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Bots Detection the beginning" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Here You can see my projects and their JupyterNotebook :D" />
+<meta property="og:description" content="Here You can see my projects and their JupyterNotebook :D" />
+<link rel="canonical" href="https://omegaji.github.io/DataScienceBlog/2020/06/17/the-beginning-of-bots-detect-eda-and-new-csv.html" />
+<meta property="og:url" content="https://omegaji.github.io/DataScienceBlog/2020/06/17/the-beginning-of-bots-detect-eda-and-new-csv.html" />
+<meta property="og:site_name" content="DataScienceProjects with OM" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-17T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Here You can see my projects and their JupyterNotebook :D","@type":"BlogPosting","headline":"Bots Detection the beginning","dateModified":"2020-06-17T00:00:00-05:00","datePublished":"2020-06-17T00:00:00-05:00","url":"https://omegaji.github.io/DataScienceBlog/2020/06/17/the-beginning-of-bots-detect-eda-and-new-csv.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://omegaji.github.io/DataScienceBlog/2020/06/17/the-beginning-of-bots-detect-eda-and-new-csv.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://omegaji.github.io/DataScienceBlog/feed.xml" title="DataScienceProjects with OM" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/DataScienceBlog/">DataScienceProjects with OM</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/DataScienceBlog/about/">About Me</a><a class="page-link" href="/DataScienceBlog/search/">Search</a><a class="page-link" href="/DataScienceBlog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Bots Detection the beginning</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-06-17T00:00:00-05:00" itemprop="datePublished">
+        Jun 17, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      17 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/omegaji/DataScienceBlog/tree/master/_notebooks/2020-06-17-the-beginning-of-bots-detect-eda-and-new-csv.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/DataScienceBlog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/omegaji/DataScienceBlog/master?filepath=_notebooks%2F2020-06-17-the-beginning-of-bots-detect-eda-and-new-csv.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/DataScienceBlog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/omegaji/DataScienceBlog/blob/master/_notebooks/2020-06-17-the-beginning-of-bots-detect-eda-and-new-csv.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/DataScienceBlog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-06-17-the-beginning-of-bots-detect-eda-and-new-csv.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1> Welcome to my kernel. I have processed some columns to get better meaning of them including the user_agent strings and I have created new csv file containing the parsed UA as it took time in parsing so I did not want others to waste their time on parsing it :D</h1>
+<h1>Please do upvote if you find this kernel helpful or else just upvote :D</h1><h1><a href="https://www.kaggle.com/omegaji/bots-ua-parsed">THE NEW DATA CREATED CAN BE FOUND HERE YOU CAN USE IT IN YOUR KERNELS!!  </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1>List of Contents</h1></p>
+<ul>
+    <li><a href="#os_ext">Os Name Extraction and shortening/Grouping</a></li>
+        <li><a href="#views_visits">Plotting User views and visits</a></li>
+        <li><a href="#what_ua">What are user agents?</a></li>
+    <li><a href="#dd">Parsing User Agent String with DeviceDetector</a></li>
+        <li><a href="#first_half">Parsing The first half sample</a></li>
+        <li><a href="#is_bot">Detecting Bot or not from user agent</a></li>
+        <li><a href="#plot_is_bot">we plot how many bots are from which os</a></li>
+            <li><a href="#is_bot_browser">we plot how many bots are from which browser</a></li>
+        <li><a href="#tocsv1">Convert the first half of the data to csv </a></li>
+            <li><a href="#secondhalf">Convert the second half </a></li>
+        <li><a href="#big">Concatenate both and final dataframe savse as csv  </a></li>
+            <li><a href="#conclusion">Future work?  </a></li>
+
+
+
+
+
+
+
+</ul>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># This Python 3 environment comes with many helpful analytics libraries installed</span>
+<span class="c1"># It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python</span>
+<span class="c1"># For example, here&#39;s several helpful packages to load</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <span class="c1"># linear algebra</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> <span class="c1"># data processing, CSV file I/O (e.g. pd.read_csv)</span>
+
+<span class="c1"># Input data files are available in the read-only &quot;../input/&quot; directory</span>
+<span class="c1"># For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="s1">&#39;/kaggle/input&#39;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+
+<span class="c1"># You can write up to 5GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using &quot;Save &amp; Run All&quot; </span>
+<span class="c1"># You can also write temporary files to /kaggle/temp/, but they won&#39;t be saved outside of the current session</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/kaggle/input/bot-detection/ibm_data.csv
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/kaggle/input/bot-detection/ibm_data.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>ctry_name</th>
+      <th>intgrtd_mngmt_name</th>
+      <th>intgrtd_operating_team_name</th>
+      <th>city</th>
+      <th>st</th>
+      <th>sec_lvl_domn</th>
+      <th>device_type</th>
+      <th>operating_sys</th>
+      <th>ip_addr</th>
+      <th>user_agent</th>
+      <th>VISIT</th>
+      <th>ENGD_VISIT</th>
+      <th>VIEWS</th>
+      <th>page_url</th>
+      <th>wk</th>
+      <th>mth</th>
+      <th>yr</th>
+      <th>page_vw_ts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>United States</td>
+      <td>United States</td>
+      <td>North America</td>
+      <td>SLIDELL</td>
+      <td>LOUISIANA</td>
+      <td>CHARTER.COM</td>
+      <td>MOBILEPHONE</td>
+      <td>IOS_12.1.4</td>
+      <td>287e8e9aeedb50e963906f10cca7ca26ae830154e69220...</td>
+      <td>MOZILLA/5.0 (IPHONE; CPU IPHONE OS 12_1_4 LIKE...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/watson/campaign</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 05:05:18.023100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Japan</td>
+      <td>Japan</td>
+      <td>Japan</td>
+      <td>TOKYO</td>
+      <td>TOKYO</td>
+      <td>MOPERA.NET</td>
+      <td>TABLET</td>
+      <td>ANDROID_6.0</td>
+      <td>d7746df5cc2de7f79584d57c2c082b9acc7697602021a1...</td>
+      <td>MOZILLA/5.0 (LINUX; ANDROID 6.0; D-01J BUILD/H...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/privacy/us/en</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 05:07:11.014300</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>United States</td>
+      <td>United States</td>
+      <td>North America</td>
+      <td>ELK GROVE</td>
+      <td>CALIFORNIA</td>
+      <td>COMCASTBUSINESS.NET</td>
+      <td>MOBILEPHONE</td>
+      <td>IOS_12.1.2</td>
+      <td>8540464f5f376c7a160d63632f8cbedc96c61158daf9ae...</td>
+      <td>MOZILLA/5.0 (IPHONE; CPU IPHONE OS 12_1_2 LIKE...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/account/reg/us-en/signup?formid=ur...</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 05:08:46.081900</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Brazil</td>
+      <td>Brazil</td>
+      <td>Latin America</td>
+      <td>SAO FRANCISCO DE GOIAS</td>
+      <td>GOIAS</td>
+      <td>VIVOZAP.COM.BR</td>
+      <td>MOBILEPHONE</td>
+      <td>ANDROID_6.0</td>
+      <td>cb9ffa7be250fc62426a431a4f08bc0c8222f63514ba39...</td>
+      <td>MOZILLA/5.0 (LINUX; ANDROID 6.0; PT-BR; 5010E ...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/analytics/br/pt/business-intelligence</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 05:07:22.033300</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>France</td>
+      <td>France</td>
+      <td>Europe</td>
+      <td>BEZONS</td>
+      <td>VAL-D'OISE</td>
+      <td>PROXAD.NET</td>
+      <td>MOBILEPHONE</td>
+      <td>ANDROID_9</td>
+      <td>7ce278be1b02a0253cc0219fa9ceddfe8e91846be343a4...</td>
+      <td>MOZILLA/5.0 (LINUX; ANDROID 9; SM-G965F BUILD/...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/watson/fr-fr</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 05:05:27.027700</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1048568</th>
+      <td>1048568</td>
+      <td>United States</td>
+      <td>United States</td>
+      <td>North America</td>
+      <td>CUPERTINO</td>
+      <td>CALIFORNIA</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>MACINTOSH_OS X 10.14</td>
+      <td>e37ade1326801a855c9b2d1bdb1f84399547c27178a7e7...</td>
+      <td>MOZILLA/5.0 (MACINTOSH; INTEL MAC OS X 10_14_2...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/talent-management/news/talent-acqu...</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 13:27:37.059600</td>
+    </tr>
+    <tr>
+      <th>1048569</th>
+      <td>1048569</td>
+      <td>Australia</td>
+      <td>Australia/NZ</td>
+      <td>Asia Pacific</td>
+      <td>SYDNEY</td>
+      <td>NEW SOUTH WALES</td>
+      <td>OPTUSNET.COM.AU</td>
+      <td>NaN</td>
+      <td>MACINTOSH_OS X 10.13</td>
+      <td>e926236cbc5da5db8bad29cdbb3537b867aa26e73a5f79...</td>
+      <td>MOZILLA/5.0 (MACINTOSH; INTEL MAC OS X 10_13_1...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ustream.tv/channel/nba4live</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 13:27:04.035100</td>
+    </tr>
+    <tr>
+      <th>1048570</th>
+      <td>1048570</td>
+      <td>United States</td>
+      <td>United States</td>
+      <td>North America</td>
+      <td>CLEVELAND</td>
+      <td>OHIO</td>
+      <td>PARKER.COM</td>
+      <td>NaN</td>
+      <td>MICROSOFT_WINDOWS10</td>
+      <td>3440973e4b965b19fa7e67b02c10ecb1d6ccc3c62e0d92...</td>
+      <td>MOZILLA/5.0 (WINDOWS NT 10.0; WIN64; X64) APPL...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>www.ibm.com/support/knowledgecenter/en/search/...</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 13:40:47.060500</td>
+    </tr>
+    <tr>
+      <th>1048571</th>
+      <td>1048571</td>
+      <td>Japan</td>
+      <td>Japan</td>
+      <td>Japan</td>
+      <td>CHIYODA-KU</td>
+      <td>TOKYO</td>
+      <td>ARGO-GRAPH.CO.JP</td>
+      <td>NaN</td>
+      <td>MICROSOFT_WINDOWS10</td>
+      <td>0ff0318b41d99bf2240173368a7d861ef512a85d0abf15...</td>
+      <td>MOZILLA/5.0 (WINDOWS NT 10.0; WIN64; X64) APPL...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>www-945.ibm.com/support/fixcentral/options</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 13:22:12.001900</td>
+    </tr>
+    <tr>
+      <th>1048572</th>
+      <td>1048572</td>
+      <td>United States</td>
+      <td>United States</td>
+      <td>North America</td>
+      <td>CHICAGO</td>
+      <td>ILLINOIS</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>MICROSOFT_WINDOWS10</td>
+      <td>1d2922b3be5a885203c932991051bfc9269596e700e51b...</td>
+      <td>MOZILLA/5.0 (WINDOWS NT 10.0; WOW64) APPLEWEBK...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/support/knowledgecenter/en/ssepgg_...</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 13:39:50.074200</td>
+    </tr>
+  </tbody>
+</table>
+<p>1048573 rows × 19 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>checking for nulls in operating systems column and replacing them with notgiven, we then find out the unique values of this column</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">operating_sys</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">df</span><span class="o">.</span><span class="n">operating_sys</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;NotGiven&quot;</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">operating_sys</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1820
+[&#39;IOS_12.1.4&#39; &#39;ANDROID_6.0&#39; &#39;IOS_12.1.2&#39; &#39;ANDROID_9&#39; &#39;ANDROID_8.0.0&#39;
+ &#39;IOS_12.1&#39; &#39;IOS_11.3&#39; &#39;IOS_12.1.1&#39; &#39;ANDROID_8.1.0&#39; &#39;MICROSOFT_WINDOWS10&#39;
+ &#39;ANDROID_7.0&#39; &#39;ANDROID_7.1.1&#39; &#39;MICROSOFT_WINDOWS7&#39; &#39;ANDROID_5.1.1&#39;
+ &#39;ANDROID_8.0&#39; &#39;ANDROID_7.1.2&#39; &#39;MACINTOSH_OS X 10.12&#39;
+ &#39;MACINTOSH_OS X 10.14&#39; &#39;MICROSOFT_WINDOWS8.1&#39; &#39;IOS_9.3.5&#39;
+ &#39;MACINTOSH_OS X 10.13&#39; &#39;LINUX&#39; &#39;ANDROID_5.0.2&#39; &#39;ANDROID_6.0.1&#39; &#39;CHROMEOS&#39;
+ &#39;MICROSOFT_WINDOWS8&#39; &#39;MACINTOSH_OS X 10.11&#39; &#39;OTHER&#39; &#39;IOS_12.0&#39;
+ &#39;IOS_12.0.1&#39; &#39;MICROSOFT_WINXP&#39; &#39;IOS_11.4.1&#39; &#39;IOS_10.2&#39; &#39;ANDROID_5.1&#39;
+ &#39;IOS_11.2.5&#39; &#39;IOS_11.2.2&#39; &#39;NotGiven&#39; &#39;IOS_11.4&#39; &#39;MACINTOSH_OS X 10.10&#39;
+ &#39;ANDROID_2.3.4&#39; &#39;ANDROID_4.2.2&#39; &#39;IOS_11.0.3&#39; &#39;ANDROID_8.1&#39; &#39;IOS_10.3.3&#39;
+ &#39;ANDROID_4.4.4&#39; &#39;ANDROID_4.3&#39; &#39;IOS_12.2&#39; &#39;ANDROID_4.4.2&#39; &#39;IOS_10.0.1&#39;
+ &#39;IOS_12.1.3&#39; &#39;ANDROID_4.1.2&#39; &#39;IOS_11.2.1&#39; &#39;MACINTOSH_OS X 10.7&#39; &#39;NETCAST&#39;
+ &#39;MACINTOSH_OS X 10.8&#39; &#39;IOS_9.3.2&#39; &#39;ANDROID_4.0.4&#39; &#39;IOS_9.2.1&#39;
+ &#39;IOS_11.2.6&#39; &#39;IOS_11.0.1&#39; &#39;MACINTOSH_OS X 10.9&#39; &#39;MICROSOFT_WINVISTA&#39;
+ &#39;IOS_9.1&#39; &#39;MACINTOSH_OS X 10.4&#39; &#39;MICROSOFT_WINNT&#39; &#39;ANDROID_5.0.1&#39;
+ &#39;ANDROID_9.0&#39; &#39;ANDROID_4.0.3&#39; &#39;IOS_11.1.2&#39; &#39;IOS_10.2.1&#39; &#39;IOS_10.0.2&#39;
+ &#39;IOS_10.3.2&#39; &#39;MACINTOSH_OS X 10.6&#39; &#39;ANDROID_4.4.3&#39; &#39;IOS_11.0.2&#39;
+ &#39;IOS_10.1.1&#39; &#39;SONY PROPRIETARY&#39; &#39;ANDROID_5.0&#39; &#39;IOS_11.1&#39;
+ &#39;WINDOWSPHONE_8.1&#39; &#39;IOS_9.0.2&#39; &#39;IOS_9.2&#39; &#39;IOS_10.3.1&#39; &#39;IOS_11.0&#39;
+ &#39;IOS_10.1&#39; &#39;IOS_10.0.3&#39; &#39;IOS_8.0.2&#39; &#39;RIMOS_BB10&#39; &#39;IOS_8.0&#39; &#39;UNIX&#39;
+ &#39;IOS_7.1&#39; &#39;SUNOSI86PC&#39; &#39;IOS_9.3&#39; &#39;FREEBSD&#39; &#39;IOS_10.3&#39; &#39;IOS_11.1.1&#39;
+ &#39;ANDROID_4.4&#39; &#39;IOS_3.2&#39; &#39;IOS_9.3.4&#39; &#39;ANDROID&#39; &#39;IOS_11.2&#39;
+ &#39;MICROSOFT_WIN98&#39; &#39;IOS_9.3.3&#39; &#39;ANDROID_4.2.1&#39; &#39;IOS_5.0&#39; &#39;OS/2_OS/2&#39;
+ &#39;IOS_5.0.1&#39; &#39;IOS&#39; &#39;ANDROID_7.0.0&#39; &#39;IOS_9.3.1&#39; &#39;IOS_4&#39; &#39;WINDOWSPHONE_10.0&#39;
+ &#39;RIMOS_6.0.0.546&#39; &#39;IOS_5.1&#39; &#39;IOS_7.0.4&#39; &#39;ANDROID_9.0.99&#39; &#39;IOS_12&#39;
+ &#39;ANDROID_4.0.2&#39; &#39;WINDOWSRT_NT 6.3&#39; &#39;IOS_11.3.1&#39; &#39;MACINTOSH_OS X&#39;
+ &#39;IOS_9.0.1&#39; &#39;WINDOWSPHONE_7.0&#39; &#39;ANDROID_4.0&#39; &#39;IOS_9.0&#39;
+ &#39;MICROSOFT_WINDOWSME&#39; &#39;MACINTOSH_OS X 10.5&#39; &#39;ANDROID_4.1&#39;
+ &#39;ANDROID_8.0ZH-CN&#39; &#39;MICROSOFT_WINDOWSANDROID10.0&#39; &#39;ANDROID_7.0.1&#39;
+ &#39;SAILFISH&#39; &#39;IOS_8.1.1&#39; &#39;SYMBIANOS_9.1&#39; &#39;ANDROID_6.1&#39; &#39;ANDROID_2.2.1&#39;
+ &#39;SUNOSSUN4U&#39; &#39;MACINTOSH_OS X 10.15&#39; &#39;ANDROID_9ZH-CN&#39; &#39;ANDROID_8.0ZH-TW&#39;
+ &#39;MICROSOFT_WIN2000&#39; &#39;SYMBIANOS_9.4&#39; &#39;ANDROID_10.2.1&#39; &#39;ANDROID_7.1&#39;
+ &#39;IOS_8.3&#39; &#39;IOS_4.0&#39; &#39;ANDROID_4.1.1&#39; &#39;0&#39; &#39;IOS_5.1.1&#39; &#39;IOS_7.0&#39; &#39;WEBOS&#39;
+ &#39;SYMBIANOS&#39; &#39;WINDOWSPHONE_8.0&#39; &#39;IOS_4.1&#39; &#39;ANDROID_8.0.0EN-US&#39; &#39;IOS_7.1.1&#39;
+ &#39;IOS_10.0&#39; &#39;IOS_6.0.2&#39; &#39;IOS_4.2.1&#39; &#39;IOS_8.4&#39; &#39;RIMOS_6.0.0.448&#39;
+ &#39;ANDROID_4.0.1&#39; &#39;ANDROID_8.0.0ZH-CN&#39; &#39;IOS_6.0&#39; &#39;OPENBSD&#39;
+ &#39;WINDOWSMOBILE_10.0&#39; &#39;ANDROID_6.0.1ZH-CN&#39; &#39;IOS_8.2&#39; &#39;IOS_9.1.1&#39;
+ &#39;MACINTOSH_OTHER&#39; &#39;ANDROID_6.0ZH-CN&#39; &#39;IOS_7.1.2&#39; &#39;WINDOWSPHONE_7&#39;
+ &#39;ANDROID_2.3.7&#39; &#39;NUCLEUSPLUS&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="os_ext"> I create a function that will classify all different variants of each os as the same os for example MICROSOFT_WINDOWS8.1
+
+MICROSOFT_WINXP are to be renamed to MICROSOFT PC</h3>
+    <h3>I do the same for the other types of os including mobile phones, I classify the ones not falling into these main types as others </h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">shortenos</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1">#print(x)</span>
+    <span class="k">if</span> <span class="s2">&quot;microsoft&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;MICROSOFT PC&quot;</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">elif</span> <span class="s2">&quot;windowsphone&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;WINDOWS MOBILE&quot;</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">elif</span> <span class="s2">&quot;windowsmobile&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;WINDOWS MOBILE&quot;</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">elif</span> <span class="s2">&quot;macintosh&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;MACOS PC&quot;</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">elif</span> <span class="s2">&quot;ios&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;IOS PHONE&quot;</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">elif</span> <span class="s2">&quot;android&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;ANDROID&quot;</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">elif</span> <span class="s2">&quot;linux&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;LINUX&quot;</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s2">&quot;notgiven&quot;</span><span class="p">:</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;NotGiven&quot;</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;OTHER&quot;</span>
+        <span class="k">return</span> <span class="n">x</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;os&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">operating_sys</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">shortenos</span><span class="p">)</span>
+  
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>Now lets groupby the new os column we created and sum the values for VIEWS and VISIT</h3>
+<h3>This will help us in analysing which of these users are belonging to which OS</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">os_df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;os&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">os_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>os</th>
+      <th>Unnamed: 0</th>
+      <th>VISIT</th>
+      <th>ENGD_VISIT</th>
+      <th>VIEWS</th>
+      <th>wk</th>
+      <th>mth</th>
+      <th>yr</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ANDROID</td>
+      <td>61939089291</td>
+      <td>124822</td>
+      <td>28151</td>
+      <td>149597</td>
+      <td>1301520</td>
+      <td>354960</td>
+      <td>238888080</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>IOS PHONE</td>
+      <td>45202927075</td>
+      <td>92695</td>
+      <td>16871</td>
+      <td>103294</td>
+      <td>950125</td>
+      <td>259125</td>
+      <td>174391125</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>LINUX</td>
+      <td>13001138033</td>
+      <td>33489</td>
+      <td>8030</td>
+      <td>39737</td>
+      <td>272404</td>
+      <td>74292</td>
+      <td>49998516</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MACOS PC</td>
+      <td>46572317434</td>
+      <td>94995</td>
+      <td>34432</td>
+      <td>118822</td>
+      <td>978395</td>
+      <td>266835</td>
+      <td>179579955</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>MICROSOFT PC</td>
+      <td>380205015829</td>
+      <td>810167</td>
+      <td>272009</td>
+      <td>1061213</td>
+      <td>7973196</td>
+      <td>2174508</td>
+      <td>1463443884</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>NotGiven</td>
+      <td>947605872</td>
+      <td>1914</td>
+      <td>99</td>
+      <td>1998</td>
+      <td>20020</td>
+      <td>5460</td>
+      <td>3674580</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>OTHER</td>
+      <td>1815171681</td>
+      <td>3583</td>
+      <td>1098</td>
+      <td>4471</td>
+      <td>37037</td>
+      <td>10101</td>
+      <td>6797973</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>WINDOWS MOBILE</td>
+      <td>68878663</td>
+      <td>157</td>
+      <td>21</td>
+      <td>178</td>
+      <td>1606</td>
+      <td>438</td>
+      <td>294774</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="views_visits">Lets PLOT! I plotted barplot on the visit and views count you can hover for the value</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+<span class="kn">import</span> <span class="nn">altair_render_script</span>
+<span class="n">alt</span><span class="o">.</span><span class="n">data_transformers</span><span class="o">.</span><span class="n">disable_max_rows</span><span class="p">()</span>
+<span class="n">base</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">os_df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+<span class="n">x</span><span class="o">=</span><span class="s2">&quot;os&quot;</span><span class="p">,</span>
+<span class="n">y</span><span class="o">=</span><span class="s2">&quot;VISIT&quot;</span><span class="p">,</span>
+<span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;VISIT&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">base2</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">os_df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+<span class="n">x</span><span class="o">=</span><span class="s2">&quot;os&quot;</span><span class="p">,</span>
+<span class="n">y</span><span class="o">=</span><span class="s2">&quot;VIEWS&quot;</span><span class="p">,</span><span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;VIEWS&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">alt</span><span class="o">.</span><span class="n">hconcat</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="n">base2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/kaggle/input/bot-detection/ibm_data.csv
+Define and register the kaggle renderer. Enable with
+
+    alt.renderers.enable(&#39;kaggle&#39;)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<style>
+.vega-actions a {
+    margin-right: 12px;
+    color: #757575;
+    font-weight: normal;
+    font-size: 13px;
+}
+.error {
+    color: red;
+}
+</style>
+<div id="vega-chart-1"></div>
+<script>
+requirejs.config({
+    "paths": {
+        "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+        "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+        "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@4.8.1?noext",
+        "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    }
+});
+function showError(el, error){
+    el.innerHTML = ('<div class="error">'
+                    + '<p>JavaScript Error: ' + error.message + '</p>'
+                    + "<p>This usually means there's a typo in your chart specification. "
+                    + "See the javascript console for the full traceback.</p>"
+                    + '</div>');
+    throw error;
+}
+require(["vega-embed"], function(vegaEmbed) {
+    const spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "hconcat": [{"mark": "bar", "encoding": {"tooltip": [{"type": "quantitative", "field": "VISIT"}], "x": {"type": "nominal", "field": "os"}, "y": {"type": "quantitative", "field": "VISIT"}}}, {"mark": "bar", "encoding": {"tooltip": [{"type": "quantitative", "field": "VIEWS"}], "x": {"type": "nominal", "field": "os"}, "y": {"type": "quantitative", "field": "VIEWS"}}}], "data": {"name": "data-cd0790f9eb16ece881bbf859d41ed13c"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-cd0790f9eb16ece881bbf859d41ed13c": [{"os": "ANDROID", "Unnamed: 0": 61939089291, "VISIT": 124822, "ENGD_VISIT": 28151, "VIEWS": 149597, "wk": 1301520, "mth": 354960, "yr": 238888080}, {"os": "IOS PHONE", "Unnamed: 0": 45202927075, "VISIT": 92695, "ENGD_VISIT": 16871, "VIEWS": 103294, "wk": 950125, "mth": 259125, "yr": 174391125}, {"os": "LINUX", "Unnamed: 0": 13001138033, "VISIT": 33489, "ENGD_VISIT": 8030, "VIEWS": 39737, "wk": 272404, "mth": 74292, "yr": 49998516}, {"os": "MACOS PC", "Unnamed: 0": 46572317434, "VISIT": 94995, "ENGD_VISIT": 34432, "VIEWS": 118822, "wk": 978395, "mth": 266835, "yr": 179579955}, {"os": "MICROSOFT PC", "Unnamed: 0": 380205015829, "VISIT": 810167, "ENGD_VISIT": 272009, "VIEWS": 1061213, "wk": 7973196, "mth": 2174508, "yr": 1463443884}, {"os": "NotGiven", "Unnamed: 0": 947605872, "VISIT": 1914, "ENGD_VISIT": 99, "VIEWS": 1998, "wk": 20020, "mth": 5460, "yr": 3674580}, {"os": "OTHER", "Unnamed: 0": 1815171681, "VISIT": 3583, "ENGD_VISIT": 1098, "VIEWS": 4471, "wk": 37037, "mth": 10101, "yr": 6797973}, {"os": "WINDOWS MOBILE", "Unnamed: 0": 68878663, "VISIT": 157, "ENGD_VISIT": 21, "VIEWS": 178, "wk": 1606, "mth": 438, "yr": 294774}]}};
+    const embed_opt = {};
+    const el = document.getElementById('vega-chart-1');
+    vegaEmbed("#vega-chart-1", spec, embed_opt)
+      .catch(error => showError(el, error));
+});
+</script>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1> As we saw microsoft leads in both VISIT and VIEWS as expected of their huge userbase</h1></p>
+<h3> now comes the hard part...well for me because I did not understand the user agent part until some googling </h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1 id="what_ua">What are user agents?</h1></p>
+<p><p>Every time your web browser makes a request to a website, it sends a HTTP Header called the "User Agent". The User Agent string contains information about your web browser name, operating system, device type and lots of other useful bits of information.</p>
+<p>But every browser sends its user agent in a different format, so decoding them can be very tricky.&lt;/p&gt;</p>
+<p><p>you have many apis and libarries that decode them for you and even tell you if the are<b>a bot or not!</b></p></p>
+<ul>
+    <li>user-agents from pypi <a href="https://pypi.org/project/user-agents/">  click here</a></li>
+        <li>device-detector(we will use this as it is faster) <a href="https://pypi.org/project/device-detector/">click here</a></li>
+        <li>what is my browser provides apis for this too well it is not free but there are some trial plans which might interest you <a href="https://developers.whatismybrowser.com/useragents/parse/">  click here</a></li></ul>
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">user_agent</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1> Installing device detector</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install device_detector
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Collecting device_detector
+  Downloading device_detector-0.10-py3-none-any.whl (552 kB)
+     |████████████████████████████████| 552 kB 2.7 MB/s eta 0:00:01
+Requirement already satisfied: pyyaml in /opt/conda/lib/python3.7/site-packages (from device_detector) (5.3.1)
+Requirement already satisfied: regex in /opt/conda/lib/python3.7/site-packages (from device_detector) (2020.4.4)
+Installing collected packages: device-detector
+Successfully installed device-detector-0.10
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1 id="dd"> you can check the docs over here https://pypi.org/project/device-detector/</h1>
+device = SoftwareDetector(ua).parse()</p>
+<p>device.client_name()        # &gt;&gt;&gt; Chrome Mobile
+device.client_short_name()  # &gt;&gt;&gt; CM
+device.client_type()        # &gt;&gt;&gt; browser
+device.client_version()     # &gt;&gt;&gt; 58.0.3029.83</p>
+<p>device.os_name()     # &gt;&gt;&gt; Android
+device.os_version()  # &gt;&gt;&gt; 6.0
+device.engine()      # &gt;&gt;&gt; WebKit</p>
+<p>device.device_brand_name()  # &gt;&gt;&gt; ''
+device.device_brand()       # &gt;&gt;&gt; ''
+device.device_model()       # &gt;&gt;&gt; ''
+device.device_type()        # &gt;&gt;&gt; ''</p>
+<p><h1> WHAT AM I EXTRACTING?</h1></p>
+<ul>
+    <li>The Browser used</li>
+    <li>The os(although we already have "os" column but I did for the sake of experimenting</li>
+    <li>THE MAIN THING IS IT A BOT????(TRUE AND FALSE)</li>
+</ul>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">device_detector</span> <span class="kn">import</span> <span class="n">SoftwareDetector</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1> I create some functions which will be used in apply one will give the client name[browser name] and the other will give out the os name</h1>
+<h1 id="first_half">NOTE:I will be trying these functions on sample data of 400000 as the original dataset takes too much time if you have any recommendation please do tell :D</h1>
+<h1> NOTE: I will then convert this to a csv filer and save it and do the same process on the remaining data and convert that too a csv file too, so 2 csv files will be created and  I will make it public so that we can easily load it without worrying about the user agents parsing </h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">parse_family</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    
+    <span class="k">return</span> <span class="n">SoftwareDetector</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">client_name</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">parse_os</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  
+    <span class="k">return</span> <span class="n">SoftwareDetector</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">os_name</span><span class="p">()</span>
+
+
+    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1> here as I stated Ill be taking the 400000 as my sample dataset</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sample_df</span><span class="o">=</span><span class="n">df</span><span class="p">[:</span><span class="mi">400000</span><span class="p">]</span>
+<span class="n">sample_df</span><span class="o">.</span><span class="n">user_agent</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/lib/python3.7/site-packages/pandas/core/series.py:4494: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  self._update_inplace(result)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1> The parse family function will parse the browser</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="n">sample_df</span><span class="p">[</span><span class="s2">&quot;user_agent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">parse_family</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1> dropping some null values and the parse os will parse the os</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sample_df</span><span class="p">[</span><span class="s2">&quot;user_browser&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">x</span>
+<span class="n">sample_df</span><span class="o">.</span><span class="n">user_agent</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sample_df</span><span class="p">[</span><span class="s2">&quot;user_os&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">sample_df</span><span class="o">.</span><span class="n">user_agent</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">parse_os</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/lib/python3.7/site-packages/ipykernel_launcher.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sample_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>ctry_name</th>
+      <th>intgrtd_mngmt_name</th>
+      <th>intgrtd_operating_team_name</th>
+      <th>city</th>
+      <th>st</th>
+      <th>sec_lvl_domn</th>
+      <th>device_type</th>
+      <th>operating_sys</th>
+      <th>ip_addr</th>
+      <th>...</th>
+      <th>ENGD_VISIT</th>
+      <th>VIEWS</th>
+      <th>page_url</th>
+      <th>wk</th>
+      <th>mth</th>
+      <th>yr</th>
+      <th>page_vw_ts</th>
+      <th>os</th>
+      <th>user_browser</th>
+      <th>user_os</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>United States</td>
+      <td>United States</td>
+      <td>North America</td>
+      <td>SLIDELL</td>
+      <td>LOUISIANA</td>
+      <td>CHARTER.COM</td>
+      <td>MOBILEPHONE</td>
+      <td>IOS_12.1.4</td>
+      <td>287e8e9aeedb50e963906f10cca7ca26ae830154e69220...</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/watson/campaign</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 05:05:18.023100</td>
+      <td>IOS PHONE</td>
+      <td>Mobile Safari</td>
+      <td>iOS</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Japan</td>
+      <td>Japan</td>
+      <td>Japan</td>
+      <td>TOKYO</td>
+      <td>TOKYO</td>
+      <td>MOPERA.NET</td>
+      <td>TABLET</td>
+      <td>ANDROID_6.0</td>
+      <td>d7746df5cc2de7f79584d57c2c082b9acc7697602021a1...</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/privacy/us/en</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 05:07:11.014300</td>
+      <td>ANDROID</td>
+      <td>Chrome</td>
+      <td>Android</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>United States</td>
+      <td>United States</td>
+      <td>North America</td>
+      <td>ELK GROVE</td>
+      <td>CALIFORNIA</td>
+      <td>COMCASTBUSINESS.NET</td>
+      <td>MOBILEPHONE</td>
+      <td>IOS_12.1.2</td>
+      <td>8540464f5f376c7a160d63632f8cbedc96c61158daf9ae...</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/account/reg/us-en/signup?formid=ur...</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 05:08:46.081900</td>
+      <td>IOS PHONE</td>
+      <td>Mobile Safari</td>
+      <td>iOS</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Brazil</td>
+      <td>Brazil</td>
+      <td>Latin America</td>
+      <td>SAO FRANCISCO DE GOIAS</td>
+      <td>GOIAS</td>
+      <td>VIVOZAP.COM.BR</td>
+      <td>MOBILEPHONE</td>
+      <td>ANDROID_6.0</td>
+      <td>cb9ffa7be250fc62426a431a4f08bc0c8222f63514ba39...</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/analytics/br/pt/business-intelligence</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 05:07:22.033300</td>
+      <td>ANDROID</td>
+      <td>Chrome Webview</td>
+      <td>Android</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>France</td>
+      <td>France</td>
+      <td>Europe</td>
+      <td>BEZONS</td>
+      <td>VAL-D'OISE</td>
+      <td>PROXAD.NET</td>
+      <td>MOBILEPHONE</td>
+      <td>ANDROID_9</td>
+      <td>7ce278be1b02a0253cc0219fa9ceddfe8e91846be343a4...</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/watson/fr-fr</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 05:05:27.027700</td>
+      <td>ANDROID</td>
+      <td>Chrome Webview</td>
+      <td>Android</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>399995</th>
+      <td>399995</td>
+      <td>United States</td>
+      <td>United States</td>
+      <td>North America</td>
+      <td>CAMDEN</td>
+      <td>NEW JERSEY</td>
+      <td>VERIZON.NET</td>
+      <td>NaN</td>
+      <td>MICROSOFT_WINDOWS10</td>
+      <td>30b77951ff6d3f82bc23144c19ce59c1c1792bd4105eba...</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>www.ibm.com/support/knowledgecenter/en/ssd29g_...</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 06:37:25.045000</td>
+      <td>MICROSOFT PC</td>
+      <td>Chrome</td>
+      <td>Windows</td>
+    </tr>
+    <tr>
+      <th>399996</th>
+      <td>399996</td>
+      <td>United States</td>
+      <td>United States</td>
+      <td>North America</td>
+      <td>LOS ANGELES</td>
+      <td>CALIFORNIA</td>
+      <td>NaN</td>
+      <td>OTHER</td>
+      <td>OTHER</td>
+      <td>15ad89bfad51c167a34488ead8d6c07877df2b748fd60d...</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www.ibm.com/privacy/details/es/es</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 07:03:33.086800</td>
+      <td>OTHER</td>
+      <td>Samsung Browser</td>
+      <td>GNU/Linux</td>
+    </tr>
+    <tr>
+      <th>399997</th>
+      <td>399997</td>
+      <td>Germany</td>
+      <td>DACH</td>
+      <td>Europe</td>
+      <td>NEUOSTHEIM</td>
+      <td>BADEN-WUERTTEMBERG</td>
+      <td>CARAT-GRUPPE.DE</td>
+      <td>NaN</td>
+      <td>MICROSOFT_WINDOWS7</td>
+      <td>ba4fe7ecb08b3e9c1f127f3a34ee50b523353f82b4069e...</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>www.ibm.com/de-de/products/category/business</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 07:00:50.074700</td>
+      <td>MICROSOFT PC</td>
+      <td>Firefox</td>
+      <td>Windows</td>
+    </tr>
+    <tr>
+      <th>399998</th>
+      <td>399998</td>
+      <td>Italy</td>
+      <td>Italy</td>
+      <td>Europe</td>
+      <td>LUNETTA</td>
+      <td>MANTOVA</td>
+      <td>MYNET.IT</td>
+      <td>NaN</td>
+      <td>MICROSOFT_WINDOWS10</td>
+      <td>050668202ee75f6f132deafd0e81dd4304944b3415c8bd...</td>
+      <td>...</td>
+      <td>1</td>
+      <td>2</td>
+      <td>www.ibm.com/partnerworld/commerce/programs/ser...</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 06:46:29.068900</td>
+      <td>MICROSOFT PC</td>
+      <td>Chrome</td>
+      <td>Windows</td>
+    </tr>
+    <tr>
+      <th>399999</th>
+      <td>399999</td>
+      <td>China</td>
+      <td>Greater China</td>
+      <td>Greater China Group</td>
+      <td>TANGSHAN</td>
+      <td>HEBEI</td>
+      <td>NaN</td>
+      <td>MOBILEPHONE</td>
+      <td>ANDROID_8.1.0</td>
+      <td>e336d4b5623673a0402ddafdd013d41418a171d063b091...</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>www-31.ibm.com/ibm/cn/smart</td>
+      <td>11</td>
+      <td>3</td>
+      <td>2019</td>
+      <td>2019-06-04 07:01:47.049700</td>
+      <td>ANDROID</td>
+      <td>Chrome Webview</td>
+      <td>Android</td>
+    </tr>
+  </tbody>
+</table>
+<p>400000 rows × 22 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="is_bot"> Note we import Device Detector below which could have been imported above as well instead of SoftwareDetector,
+but SoftwareDetector detects the software specifically and it faster than device_detector which is said in the docs :D, but device detector below will be needed to classify as bots or not
+</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">device_detector</span> <span class="kn">import</span> <span class="n">DeviceDetector</span>
+<span class="k">def</span> <span class="nf">parse_is_bot</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">DeviceDetector</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">is_bot</span><span class="p">()</span>
+<span class="n">sample_df</span><span class="o">.</span><span class="n">user_agent</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sample_df</span><span class="p">[</span><span class="s2">&quot;is_bot&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">sample_df</span><span class="p">[</span><span class="s2">&quot;user_agent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">parse_is_bot</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/lib/python3.7/site-packages/pandas/core/series.py:4494: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  self._update_inplace(result)
+/opt/conda/lib/python3.7/site-packages/ipykernel_launcher.py:5: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  &#34;&#34;&#34;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h1>Some oses were empty because it couldnt be detected so I added unknown string to it</h1></p>
+<h2>I then group the sample_df by users_os(the one from the User Agent string) and is bot column and use the Count() on each column</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">replace_empty_user</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">==</span><span class="s2">&quot;&quot;</span><span class="p">:</span>
+       <span class="k">return</span> <span class="s2">&quot;Unknown&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span>
+<span class="n">sample_df</span><span class="p">[</span><span class="s2">&quot;user_os&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">sample_df</span><span class="p">[</span><span class="s2">&quot;user_os&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">replace_empty_user</span><span class="p">)</span>
+<span class="n">user_os_df</span><span class="o">=</span><span class="n">sample_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;user_os&quot;</span><span class="p">,</span><span class="s2">&quot;is_bot&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/lib/python3.7/site-packages/ipykernel_launcher.py:6: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1>Renaming the column unamed to count</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">user_os_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Unnamed: 0&quot;</span><span class="p">:</span> <span class="s2">&quot;count&quot;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">user_os_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_os</th>
+      <th>is_bot</th>
+      <th>count</th>
+      <th>ctry_name</th>
+      <th>intgrtd_mngmt_name</th>
+      <th>intgrtd_operating_team_name</th>
+      <th>city</th>
+      <th>st</th>
+      <th>sec_lvl_domn</th>
+      <th>device_type</th>
+      <th>...</th>
+      <th>VISIT</th>
+      <th>ENGD_VISIT</th>
+      <th>VIEWS</th>
+      <th>page_url</th>
+      <th>wk</th>
+      <th>mth</th>
+      <th>yr</th>
+      <th>page_vw_ts</th>
+      <th>os</th>
+      <th>user_browser</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Android</td>
+      <td>False</td>
+      <td>45088</td>
+      <td>45088</td>
+      <td>45088</td>
+      <td>45088</td>
+      <td>42723</td>
+      <td>42786</td>
+      <td>24783</td>
+      <td>45076</td>
+      <td>...</td>
+      <td>45088</td>
+      <td>45088</td>
+      <td>45088</td>
+      <td>45088</td>
+      <td>45088</td>
+      <td>45088</td>
+      <td>45088</td>
+      <td>44979</td>
+      <td>45088</td>
+      <td>45088</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Android</td>
+      <td>True</td>
+      <td>26</td>
+      <td>26</td>
+      <td>26</td>
+      <td>26</td>
+      <td>2</td>
+      <td>2</td>
+      <td>26</td>
+      <td>26</td>
+      <td>...</td>
+      <td>26</td>
+      <td>26</td>
+      <td>26</td>
+      <td>26</td>
+      <td>26</td>
+      <td>26</td>
+      <td>26</td>
+      <td>26</td>
+      <td>26</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BlackBerry OS</td>
+      <td>False</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>8</td>
+      <td>14</td>
+      <td>...</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CentOS</td>
+      <td>True</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>0</td>
+      <td>24</td>
+      <td>...</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Chrome OS</td>
+      <td>False</td>
+      <td>693</td>
+      <td>693</td>
+      <td>693</td>
+      <td>693</td>
+      <td>685</td>
+      <td>685</td>
+      <td>507</td>
+      <td>0</td>
+      <td>...</td>
+      <td>693</td>
+      <td>693</td>
+      <td>693</td>
+      <td>693</td>
+      <td>693</td>
+      <td>693</td>
+      <td>693</td>
+      <td>693</td>
+      <td>693</td>
+      <td>693</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Fedora</td>
+      <td>False</td>
+      <td>465</td>
+      <td>465</td>
+      <td>465</td>
+      <td>465</td>
+      <td>461</td>
+      <td>461</td>
+      <td>393</td>
+      <td>0</td>
+      <td>...</td>
+      <td>465</td>
+      <td>465</td>
+      <td>465</td>
+      <td>465</td>
+      <td>465</td>
+      <td>465</td>
+      <td>465</td>
+      <td>462</td>
+      <td>465</td>
+      <td>465</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>FreeBSD</td>
+      <td>False</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>...</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>GNU/Linux</td>
+      <td>False</td>
+      <td>6495</td>
+      <td>6495</td>
+      <td>6495</td>
+      <td>6495</td>
+      <td>6381</td>
+      <td>6381</td>
+      <td>4644</td>
+      <td>75</td>
+      <td>...</td>
+      <td>6495</td>
+      <td>6495</td>
+      <td>6495</td>
+      <td>6495</td>
+      <td>6495</td>
+      <td>6495</td>
+      <td>6495</td>
+      <td>6480</td>
+      <td>6495</td>
+      <td>6495</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>GNU/Linux</td>
+      <td>True</td>
+      <td>31</td>
+      <td>31</td>
+      <td>31</td>
+      <td>31</td>
+      <td>0</td>
+      <td>0</td>
+      <td>31</td>
+      <td>3</td>
+      <td>...</td>
+      <td>31</td>
+      <td>31</td>
+      <td>31</td>
+      <td>31</td>
+      <td>31</td>
+      <td>31</td>
+      <td>31</td>
+      <td>31</td>
+      <td>31</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>KaiOS</td>
+      <td>False</td>
+      <td>359</td>
+      <td>359</td>
+      <td>359</td>
+      <td>359</td>
+      <td>359</td>
+      <td>359</td>
+      <td>1</td>
+      <td>359</td>
+      <td>...</td>
+      <td>359</td>
+      <td>359</td>
+      <td>359</td>
+      <td>359</td>
+      <td>359</td>
+      <td>359</td>
+      <td>359</td>
+      <td>357</td>
+      <td>359</td>
+      <td>359</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Mac</td>
+      <td>False</td>
+      <td>34064</td>
+      <td>34064</td>
+      <td>34064</td>
+      <td>34064</td>
+      <td>33435</td>
+      <td>33451</td>
+      <td>25702</td>
+      <td>0</td>
+      <td>...</td>
+      <td>34064</td>
+      <td>34064</td>
+      <td>34064</td>
+      <td>34064</td>
+      <td>34064</td>
+      <td>34064</td>
+      <td>34064</td>
+      <td>33973</td>
+      <td>34064</td>
+      <td>34064</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Mint</td>
+      <td>False</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>OS/2</td>
+      <td>False</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>...</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Ordissimo</td>
+      <td>False</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>PlayStation</td>
+      <td>False</td>
+      <td>77</td>
+      <td>77</td>
+      <td>77</td>
+      <td>77</td>
+      <td>76</td>
+      <td>76</td>
+      <td>69</td>
+      <td>77</td>
+      <td>...</td>
+      <td>77</td>
+      <td>77</td>
+      <td>77</td>
+      <td>77</td>
+      <td>77</td>
+      <td>77</td>
+      <td>77</td>
+      <td>75</td>
+      <td>77</td>
+      <td>77</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Sailfish OS</td>
+      <td>False</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Solaris</td>
+      <td>False</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>...</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Symbian</td>
+      <td>False</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Symbian OS Series 60</td>
+      <td>False</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Tizen</td>
+      <td>False</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+      <td>40</td>
+      <td>62</td>
+      <td>...</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Ubuntu</td>
+      <td>False</td>
+      <td>2589</td>
+      <td>2589</td>
+      <td>2589</td>
+      <td>2589</td>
+      <td>2567</td>
+      <td>2567</td>
+      <td>1979</td>
+      <td>0</td>
+      <td>...</td>
+      <td>2589</td>
+      <td>2589</td>
+      <td>2589</td>
+      <td>2589</td>
+      <td>2589</td>
+      <td>2589</td>
+      <td>2589</td>
+      <td>2582</td>
+      <td>2589</td>
+      <td>2589</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Unknown</td>
+      <td>False</td>
+      <td>142</td>
+      <td>142</td>
+      <td>142</td>
+      <td>142</td>
+      <td>140</td>
+      <td>140</td>
+      <td>140</td>
+      <td>2</td>
+      <td>...</td>
+      <td>142</td>
+      <td>142</td>
+      <td>142</td>
+      <td>142</td>
+      <td>142</td>
+      <td>142</td>
+      <td>142</td>
+      <td>141</td>
+      <td>142</td>
+      <td>142</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Unknown</td>
+      <td>True</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>0</td>
+      <td>...</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+      <td>471</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Windows</td>
+      <td>False</td>
+      <td>276437</td>
+      <td>276437</td>
+      <td>276437</td>
+      <td>276437</td>
+      <td>262092</td>
+      <td>262430</td>
+      <td>193998</td>
+      <td>11</td>
+      <td>...</td>
+      <td>276437</td>
+      <td>276437</td>
+      <td>276437</td>
+      <td>276436</td>
+      <td>276437</td>
+      <td>276437</td>
+      <td>276437</td>
+      <td>275773</td>
+      <td>276437</td>
+      <td>276437</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Windows Phone</td>
+      <td>False</td>
+      <td>61</td>
+      <td>61</td>
+      <td>61</td>
+      <td>61</td>
+      <td>59</td>
+      <td>59</td>
+      <td>33</td>
+      <td>61</td>
+      <td>...</td>
+      <td>61</td>
+      <td>61</td>
+      <td>61</td>
+      <td>61</td>
+      <td>61</td>
+      <td>61</td>
+      <td>61</td>
+      <td>61</td>
+      <td>61</td>
+      <td>61</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Windows RT</td>
+      <td>False</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>8</td>
+      <td>10</td>
+      <td>...</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>iOS</td>
+      <td>False</td>
+      <td>32864</td>
+      <td>32864</td>
+      <td>32864</td>
+      <td>32864</td>
+      <td>32561</td>
+      <td>32578</td>
+      <td>25600</td>
+      <td>32863</td>
+      <td>...</td>
+      <td>32864</td>
+      <td>32864</td>
+      <td>32864</td>
+      <td>32864</td>
+      <td>32864</td>
+      <td>32864</td>
+      <td>32864</td>
+      <td>32760</td>
+      <td>32864</td>
+      <td>32864</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>iOS</td>
+      <td>True</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>10</td>
+      <td>10</td>
+      <td>1</td>
+      <td>11</td>
+      <td>...</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+<p>28 rows × 23 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="plot_is_bot"> Plotting 2 barplots one for bots detected and one for not bots hover for more info</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">base</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">user_os_df</span><span class="p">[</span><span class="n">user_os_df</span><span class="o">.</span><span class="n">is_bot</span><span class="o">==</span><span class="kc">True</span><span class="p">])</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+<span class="n">x</span><span class="o">=</span><span class="s2">&quot;user_os&quot;</span><span class="p">,</span>
+<span class="n">y</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;BOTS&quot;</span><span class="p">)</span>
+
+<span class="n">base1</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">user_os_df</span><span class="p">[</span><span class="n">user_os_df</span><span class="o">.</span><span class="n">is_bot</span><span class="o">==</span><span class="kc">False</span><span class="p">])</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+<span class="n">x</span><span class="o">=</span><span class="s2">&quot;user_os&quot;</span><span class="p">,</span>
+<span class="n">y</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span>
+     <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Not_BOTS&quot;</span><span class="p">)</span>
+<span class="n">alt</span><span class="o">.</span><span class="n">hconcat</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="n">base1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<style>
+.vega-actions a {
+    margin-right: 12px;
+    color: #757575;
+    font-weight: normal;
+    font-size: 13px;
+}
+.error {
+    color: red;
+}
+</style>
+<div id="vega-chart-6"></div>
+<script>
+requirejs.config({
+    "paths": {
+        "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+        "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+        "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@4.8.1?noext",
+        "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    }
+});
+function showError(el, error){
+    el.innerHTML = ('<div class="error">'
+                    + '<p>JavaScript Error: ' + error.message + '</p>'
+                    + "<p>This usually means there's a typo in your chart specification. "
+                    + "See the javascript console for the full traceback.</p>"
+                    + '</div>');
+    throw error;
+}
+require(["vega-embed"], function(vegaEmbed) {
+    const spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "hconcat": [{"data": {"name": "data-29c2cb02b38e25978885291088c2f43e"}, "mark": "bar", "encoding": {"tooltip": [{"type": "quantitative", "field": "count"}], "x": {"type": "nominal", "field": "user_os"}, "y": {"type": "quantitative", "field": "count"}}, "title": "BOTS"}, {"data": {"name": "data-01a351b06f28732c1dfb1c36b8d47d33"}, "mark": "bar", "encoding": {"tooltip": [{"type": "quantitative", "field": "count"}], "x": {"type": "nominal", "field": "user_os"}, "y": {"type": "quantitative", "field": "count"}}, "title": "Not_BOTS"}], "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-29c2cb02b38e25978885291088c2f43e": [{"user_os": "Android", "is_bot": true, "count": 26, "ctry_name": 26, "intgrtd_mngmt_name": 26, "intgrtd_operating_team_name": 26, "city": 2, "st": 2, "sec_lvl_domn": 26, "device_type": 26, "operating_sys": 26, "ip_addr": 26, "user_agent": 26, "VISIT": 26, "ENGD_VISIT": 26, "VIEWS": 26, "page_url": 26, "wk": 26, "mth": 26, "yr": 26, "page_vw_ts": 26, "os": 26, "user_browser": 26}, {"user_os": "CentOS", "is_bot": true, "count": 24, "ctry_name": 24, "intgrtd_mngmt_name": 24, "intgrtd_operating_team_name": 24, "city": 24, "st": 24, "sec_lvl_domn": 0, "device_type": 24, "operating_sys": 24, "ip_addr": 24, "user_agent": 24, "VISIT": 24, "ENGD_VISIT": 24, "VIEWS": 24, "page_url": 24, "wk": 24, "mth": 24, "yr": 24, "page_vw_ts": 24, "os": 24, "user_browser": 24}, {"user_os": "GNU/Linux", "is_bot": true, "count": 31, "ctry_name": 31, "intgrtd_mngmt_name": 31, "intgrtd_operating_team_name": 31, "city": 0, "st": 0, "sec_lvl_domn": 31, "device_type": 3, "operating_sys": 31, "ip_addr": 31, "user_agent": 31, "VISIT": 31, "ENGD_VISIT": 31, "VIEWS": 31, "page_url": 31, "wk": 31, "mth": 31, "yr": 31, "page_vw_ts": 31, "os": 31, "user_browser": 31}, {"user_os": "Unknown", "is_bot": true, "count": 471, "ctry_name": 471, "intgrtd_mngmt_name": 471, "intgrtd_operating_team_name": 471, "city": 471, "st": 471, "sec_lvl_domn": 471, "device_type": 0, "operating_sys": 471, "ip_addr": 471, "user_agent": 471, "VISIT": 471, "ENGD_VISIT": 471, "VIEWS": 471, "page_url": 471, "wk": 471, "mth": 471, "yr": 471, "page_vw_ts": 471, "os": 471, "user_browser": 471}, {"user_os": "iOS", "is_bot": true, "count": 11, "ctry_name": 11, "intgrtd_mngmt_name": 11, "intgrtd_operating_team_name": 11, "city": 10, "st": 10, "sec_lvl_domn": 1, "device_type": 11, "operating_sys": 11, "ip_addr": 11, "user_agent": 11, "VISIT": 11, "ENGD_VISIT": 11, "VIEWS": 11, "page_url": 11, "wk": 11, "mth": 11, "yr": 11, "page_vw_ts": 11, "os": 11, "user_browser": 11}], "data-01a351b06f28732c1dfb1c36b8d47d33": [{"user_os": "Android", "is_bot": false, "count": 45088, "ctry_name": 45088, "intgrtd_mngmt_name": 45088, "intgrtd_operating_team_name": 45088, "city": 42723, "st": 42786, "sec_lvl_domn": 24783, "device_type": 45076, "operating_sys": 45088, "ip_addr": 45088, "user_agent": 45088, "VISIT": 45088, "ENGD_VISIT": 45088, "VIEWS": 45088, "page_url": 45088, "wk": 45088, "mth": 45088, "yr": 45088, "page_vw_ts": 44979, "os": 45088, "user_browser": 45088}, {"user_os": "BlackBerry OS", "is_bot": false, "count": 14, "ctry_name": 14, "intgrtd_mngmt_name": 14, "intgrtd_operating_team_name": 14, "city": 14, "st": 14, "sec_lvl_domn": 8, "device_type": 14, "operating_sys": 14, "ip_addr": 14, "user_agent": 14, "VISIT": 14, "ENGD_VISIT": 14, "VIEWS": 14, "page_url": 14, "wk": 14, "mth": 14, "yr": 14, "page_vw_ts": 14, "os": 14, "user_browser": 14}, {"user_os": "Chrome OS", "is_bot": false, "count": 693, "ctry_name": 693, "intgrtd_mngmt_name": 693, "intgrtd_operating_team_name": 693, "city": 685, "st": 685, "sec_lvl_domn": 507, "device_type": 0, "operating_sys": 693, "ip_addr": 693, "user_agent": 693, "VISIT": 693, "ENGD_VISIT": 693, "VIEWS": 693, "page_url": 693, "wk": 693, "mth": 693, "yr": 693, "page_vw_ts": 693, "os": 693, "user_browser": 693}, {"user_os": "Fedora", "is_bot": false, "count": 465, "ctry_name": 465, "intgrtd_mngmt_name": 465, "intgrtd_operating_team_name": 465, "city": 461, "st": 461, "sec_lvl_domn": 393, "device_type": 0, "operating_sys": 465, "ip_addr": 465, "user_agent": 465, "VISIT": 465, "ENGD_VISIT": 465, "VIEWS": 465, "page_url": 465, "wk": 465, "mth": 465, "yr": 465, "page_vw_ts": 462, "os": 465, "user_browser": 465}, {"user_os": "FreeBSD", "is_bot": false, "count": 3, "ctry_name": 3, "intgrtd_mngmt_name": 3, "intgrtd_operating_team_name": 3, "city": 3, "st": 3, "sec_lvl_domn": 3, "device_type": 0, "operating_sys": 3, "ip_addr": 3, "user_agent": 3, "VISIT": 3, "ENGD_VISIT": 3, "VIEWS": 3, "page_url": 3, "wk": 3, "mth": 3, "yr": 3, "page_vw_ts": 3, "os": 3, "user_browser": 3}, {"user_os": "GNU/Linux", "is_bot": false, "count": 6495, "ctry_name": 6495, "intgrtd_mngmt_name": 6495, "intgrtd_operating_team_name": 6495, "city": 6381, "st": 6381, "sec_lvl_domn": 4644, "device_type": 75, "operating_sys": 6495, "ip_addr": 6495, "user_agent": 6495, "VISIT": 6495, "ENGD_VISIT": 6495, "VIEWS": 6495, "page_url": 6495, "wk": 6495, "mth": 6495, "yr": 6495, "page_vw_ts": 6480, "os": 6495, "user_browser": 6495}, {"user_os": "KaiOS", "is_bot": false, "count": 359, "ctry_name": 359, "intgrtd_mngmt_name": 359, "intgrtd_operating_team_name": 359, "city": 359, "st": 359, "sec_lvl_domn": 1, "device_type": 359, "operating_sys": 359, "ip_addr": 359, "user_agent": 359, "VISIT": 359, "ENGD_VISIT": 359, "VIEWS": 359, "page_url": 359, "wk": 359, "mth": 359, "yr": 359, "page_vw_ts": 357, "os": 359, "user_browser": 359}, {"user_os": "Mac", "is_bot": false, "count": 34064, "ctry_name": 34064, "intgrtd_mngmt_name": 34064, "intgrtd_operating_team_name": 34064, "city": 33435, "st": 33451, "sec_lvl_domn": 25702, "device_type": 0, "operating_sys": 34064, "ip_addr": 34064, "user_agent": 34064, "VISIT": 34064, "ENGD_VISIT": 34064, "VIEWS": 34064, "page_url": 34064, "wk": 34064, "mth": 34064, "yr": 34064, "page_vw_ts": 33973, "os": 34064, "user_browser": 34064}, {"user_os": "Mint", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_browser": 1}, {"user_os": "OS/2", "is_bot": false, "count": 2, "ctry_name": 2, "intgrtd_mngmt_name": 2, "intgrtd_operating_team_name": 2, "city": 2, "st": 2, "sec_lvl_domn": 2, "device_type": 0, "operating_sys": 2, "ip_addr": 2, "user_agent": 2, "VISIT": 2, "ENGD_VISIT": 2, "VIEWS": 2, "page_url": 2, "wk": 2, "mth": 2, "yr": 2, "page_vw_ts": 2, "os": 2, "user_browser": 2}, {"user_os": "Ordissimo", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_browser": 1}, {"user_os": "PlayStation", "is_bot": false, "count": 77, "ctry_name": 77, "intgrtd_mngmt_name": 77, "intgrtd_operating_team_name": 77, "city": 76, "st": 76, "sec_lvl_domn": 69, "device_type": 77, "operating_sys": 77, "ip_addr": 77, "user_agent": 77, "VISIT": 77, "ENGD_VISIT": 77, "VIEWS": 77, "page_url": 77, "wk": 77, "mth": 77, "yr": 77, "page_vw_ts": 75, "os": 77, "user_browser": 77}, {"user_os": "Sailfish OS", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_browser": 1}, {"user_os": "Solaris", "is_bot": false, "count": 3, "ctry_name": 3, "intgrtd_mngmt_name": 3, "intgrtd_operating_team_name": 3, "city": 3, "st": 3, "sec_lvl_domn": 3, "device_type": 0, "operating_sys": 3, "ip_addr": 3, "user_agent": 3, "VISIT": 3, "ENGD_VISIT": 3, "VIEWS": 3, "page_url": 3, "wk": 3, "mth": 3, "yr": 3, "page_vw_ts": 3, "os": 3, "user_browser": 3}, {"user_os": "Symbian", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_browser": 1}, {"user_os": "Symbian OS Series 60", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_browser": 1}, {"user_os": "Tizen", "is_bot": false, "count": 63, "ctry_name": 63, "intgrtd_mngmt_name": 63, "intgrtd_operating_team_name": 63, "city": 63, "st": 63, "sec_lvl_domn": 40, "device_type": 62, "operating_sys": 63, "ip_addr": 63, "user_agent": 63, "VISIT": 63, "ENGD_VISIT": 63, "VIEWS": 63, "page_url": 63, "wk": 63, "mth": 63, "yr": 63, "page_vw_ts": 63, "os": 63, "user_browser": 63}, {"user_os": "Ubuntu", "is_bot": false, "count": 2589, "ctry_name": 2589, "intgrtd_mngmt_name": 2589, "intgrtd_operating_team_name": 2589, "city": 2567, "st": 2567, "sec_lvl_domn": 1979, "device_type": 0, "operating_sys": 2589, "ip_addr": 2589, "user_agent": 2589, "VISIT": 2589, "ENGD_VISIT": 2589, "VIEWS": 2589, "page_url": 2589, "wk": 2589, "mth": 2589, "yr": 2589, "page_vw_ts": 2582, "os": 2589, "user_browser": 2589}, {"user_os": "Unknown", "is_bot": false, "count": 142, "ctry_name": 142, "intgrtd_mngmt_name": 142, "intgrtd_operating_team_name": 142, "city": 140, "st": 140, "sec_lvl_domn": 140, "device_type": 2, "operating_sys": 142, "ip_addr": 142, "user_agent": 142, "VISIT": 142, "ENGD_VISIT": 142, "VIEWS": 142, "page_url": 142, "wk": 142, "mth": 142, "yr": 142, "page_vw_ts": 141, "os": 142, "user_browser": 142}, {"user_os": "Windows", "is_bot": false, "count": 276437, "ctry_name": 276437, "intgrtd_mngmt_name": 276437, "intgrtd_operating_team_name": 276437, "city": 262092, "st": 262430, "sec_lvl_domn": 193998, "device_type": 11, "operating_sys": 276437, "ip_addr": 276437, "user_agent": 276437, "VISIT": 276437, "ENGD_VISIT": 276437, "VIEWS": 276437, "page_url": 276436, "wk": 276437, "mth": 276437, "yr": 276437, "page_vw_ts": 275773, "os": 276437, "user_browser": 276437}, {"user_os": "Windows Phone", "is_bot": false, "count": 61, "ctry_name": 61, "intgrtd_mngmt_name": 61, "intgrtd_operating_team_name": 61, "city": 59, "st": 59, "sec_lvl_domn": 33, "device_type": 61, "operating_sys": 61, "ip_addr": 61, "user_agent": 61, "VISIT": 61, "ENGD_VISIT": 61, "VIEWS": 61, "page_url": 61, "wk": 61, "mth": 61, "yr": 61, "page_vw_ts": 61, "os": 61, "user_browser": 61}, {"user_os": "Windows RT", "is_bot": false, "count": 10, "ctry_name": 10, "intgrtd_mngmt_name": 10, "intgrtd_operating_team_name": 10, "city": 10, "st": 10, "sec_lvl_domn": 8, "device_type": 10, "operating_sys": 10, "ip_addr": 10, "user_agent": 10, "VISIT": 10, "ENGD_VISIT": 10, "VIEWS": 10, "page_url": 10, "wk": 10, "mth": 10, "yr": 10, "page_vw_ts": 10, "os": 10, "user_browser": 10}, {"user_os": "iOS", "is_bot": false, "count": 32864, "ctry_name": 32864, "intgrtd_mngmt_name": 32864, "intgrtd_operating_team_name": 32864, "city": 32561, "st": 32578, "sec_lvl_domn": 25600, "device_type": 32863, "operating_sys": 32864, "ip_addr": 32864, "user_agent": 32864, "VISIT": 32864, "ENGD_VISIT": 32864, "VIEWS": 32864, "page_url": 32864, "wk": 32864, "mth": 32864, "yr": 32864, "page_vw_ts": 32760, "os": 32864, "user_browser": 32864}]}};
+    const embed_opt = {};
+    const el = document.getElementById('vega-chart-6');
+    vegaEmbed("#vega-chart-6", spec, embed_opt)
+      .catch(error => showError(el, error));
+});
+</script>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="is_bot_browser"> We do the same but instead of user os we count for browser</h1>
+<h1>NOTE: There are some browser names parsed by the parse like _CT_OBJ...etc I do not have much information about them If you have any knowledge or info about them please do comment :D</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">browser_df</span><span class="o">=</span><span class="n">sample_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;user_browser&quot;</span><span class="p">,</span><span class="s2">&quot;is_bot&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">browser_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Unnamed: 0&quot;</span><span class="p">:</span> <span class="s2">&quot;count&quot;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">base</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">browser_df</span><span class="p">[</span><span class="n">browser_df</span><span class="o">.</span><span class="n">is_bot</span><span class="o">==</span><span class="kc">True</span><span class="p">])</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+<span class="n">x</span><span class="o">=</span><span class="s2">&quot;user_browser&quot;</span><span class="p">,</span>
+<span class="n">y</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;BOTS&quot;</span><span class="p">)</span>
+
+<span class="n">base1</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">browser_df</span><span class="p">[</span><span class="n">browser_df</span><span class="o">.</span><span class="n">is_bot</span><span class="o">==</span><span class="kc">False</span><span class="p">])</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+<span class="n">x</span><span class="o">=</span><span class="s2">&quot;user_browser&quot;</span><span class="p">,</span>
+<span class="n">y</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span>
+     <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Not_BOTS&quot;</span><span class="p">)</span>
+<span class="n">alt</span><span class="o">.</span><span class="n">hconcat</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="n">base1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<style>
+.vega-actions a {
+    margin-right: 12px;
+    color: #757575;
+    font-weight: normal;
+    font-size: 13px;
+}
+.error {
+    color: red;
+}
+</style>
+<div id="vega-chart-7"></div>
+<script>
+requirejs.config({
+    "paths": {
+        "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+        "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+        "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@4.8.1?noext",
+        "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    }
+});
+function showError(el, error){
+    el.innerHTML = ('<div class="error">'
+                    + '<p>JavaScript Error: ' + error.message + '</p>'
+                    + "<p>This usually means there's a typo in your chart specification. "
+                    + "See the javascript console for the full traceback.</p>"
+                    + '</div>');
+    throw error;
+}
+require(["vega-embed"], function(vegaEmbed) {
+    const spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "hconcat": [{"data": {"name": "data-d70240dc89b68a9b9be8ae511084ecbf"}, "mark": "bar", "encoding": {"tooltip": [{"type": "quantitative", "field": "count"}], "x": {"type": "nominal", "field": "user_browser"}, "y": {"type": "quantitative", "field": "count"}}, "title": "BOTS"}, {"data": {"name": "data-239e3c90c70ce3fa61a954b9047379aa"}, "mark": "bar", "encoding": {"tooltip": [{"type": "quantitative", "field": "count"}], "x": {"type": "nominal", "field": "user_browser"}, "y": {"type": "quantitative", "field": "count"}}, "title": "Not_BOTS"}], "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-d70240dc89b68a9b9be8ae511084ecbf": [{"user_browser": "Chrome", "is_bot": true, "count": 74, "ctry_name": 74, "intgrtd_mngmt_name": 74, "intgrtd_operating_team_name": 74, "city": 24, "st": 24, "sec_lvl_domn": 50, "device_type": 46, "operating_sys": 74, "ip_addr": 74, "user_agent": 74, "VISIT": 74, "ENGD_VISIT": 74, "VIEWS": 74, "page_url": 74, "wk": 74, "mth": 74, "yr": 74, "page_vw_ts": 74, "os": 74, "user_os": 74}, {"user_browser": "Chrome Mobile", "is_bot": true, "count": 7, "ctry_name": 7, "intgrtd_mngmt_name": 7, "intgrtd_operating_team_name": 7, "city": 2, "st": 2, "sec_lvl_domn": 7, "device_type": 7, "operating_sys": 7, "ip_addr": 7, "user_agent": 7, "VISIT": 7, "ENGD_VISIT": 7, "VIEWS": 7, "page_url": 7, "wk": 7, "mth": 7, "yr": 7, "page_vw_ts": 7, "os": 7, "user_os": 7}, {"user_browser": "MAPPY", "is_bot": true, "count": 471, "ctry_name": 471, "intgrtd_mngmt_name": 471, "intgrtd_operating_team_name": 471, "city": 471, "st": 471, "sec_lvl_domn": 471, "device_type": 0, "operating_sys": 471, "ip_addr": 471, "user_agent": 471, "VISIT": 471, "ENGD_VISIT": 471, "VIEWS": 471, "page_url": 471, "wk": 471, "mth": 471, "yr": 471, "page_vw_ts": 471, "os": 471, "user_os": 471}, {"user_browser": "Mobile Safari", "is_bot": true, "count": 11, "ctry_name": 11, "intgrtd_mngmt_name": 11, "intgrtd_operating_team_name": 11, "city": 10, "st": 10, "sec_lvl_domn": 1, "device_type": 11, "operating_sys": 11, "ip_addr": 11, "user_agent": 11, "VISIT": 11, "ENGD_VISIT": 11, "VIEWS": 11, "page_url": 11, "wk": 11, "mth": 11, "yr": 11, "page_vw_ts": 11, "os": 11, "user_os": 11}], "data-239e3c90c70ce3fa61a954b9047379aa": [{"user_browser": "", "is_bot": false, "count": 156, "ctry_name": 156, "intgrtd_mngmt_name": 156, "intgrtd_operating_team_name": 156, "city": 155, "st": 155, "sec_lvl_domn": 126, "device_type": 0, "operating_sys": 156, "ip_addr": 156, "user_agent": 156, "VISIT": 156, "ENGD_VISIT": 156, "VIEWS": 156, "page_url": 156, "wk": 156, "mth": 156, "yr": 156, "page_vw_ts": 155, "os": 156, "user_os": 156}, {"user_browser": "0F9F2FD6-FE81-4EF8-AC25", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "2017092505 CFNETWORK", "is_bot": false, "count": 3, "ctry_name": 3, "intgrtd_mngmt_name": 3, "intgrtd_operating_team_name": 3, "city": 3, "st": 3, "sec_lvl_domn": 3, "device_type": 0, "operating_sys": 3, "ip_addr": 3, "user_agent": 3, "VISIT": 3, "ENGD_VISIT": 3, "VIEWS": 3, "page_url": 3, "wk": 3, "mth": 3, "yr": 3, "page_vw_ts": 3, "os": 3, "user_os": 3}, {"user_browser": "241EFEBA-F474", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "2B561BBE-A3F4", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "35CF0C95-DC75-46EC-B0DA", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "3A4F4CB3-8FCC-4DF7-A91F", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "4E94ABBF-6DBA", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "7AABB8CF-E735", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "7DDF0F9C-A6C0", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "92B1BD42-CB7F-49FD-83AC", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "9B6AD7D7-C7D2", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:", "is_bot": false, "count": 4, "ctry_name": 4, "intgrtd_mngmt_name": 4, "intgrtd_operating_team_name": 4, "city": 4, "st": 4, "sec_lvl_domn": 4, "device_type": 0, "operating_sys": 4, "ip_addr": 4, "user_agent": 4, "VISIT": 4, "ENGD_VISIT": 4, "VIEWS": 4, "page_url": 4, "wk": 4, "mth": 4, "yr": 4, "page_vw_ts": 4, "os": 4, "user_os": 4}, {"user_browser": ";__CT_JOB_ID__:0CE0A", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:1DC3D5CC", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:1FA2B", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:5E8D3E", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:7B1C3C", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:8FB", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:9BC", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:A1EF", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:AC", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:B", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:BC", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:BC4FCB", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:E", "is_bot": false, "count": 2, "ctry_name": 2, "intgrtd_mngmt_name": 2, "intgrtd_operating_team_name": 2, "city": 2, "st": 2, "sec_lvl_domn": 2, "device_type": 0, "operating_sys": 2, "ip_addr": 2, "user_agent": 2, "VISIT": 2, "ENGD_VISIT": 2, "VIEWS": 2, "page_url": 2, "wk": 2, "mth": 2, "yr": 2, "page_vw_ts": 2, "os": 2, "user_os": 2}, {"user_browser": ";__CT_JOB_ID__:F", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": ";__CT_JOB_ID__:FEF", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "<CUSTOMAGENTUSER>-<SMART>", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 0, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "A1DDDEED-0E30-418F-903D", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "A45B6AEA-4C05-4FFF-95CD", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "AD505D7D-16BE", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "AE2A0886-B9DA", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "AEC11D2A-C4F8", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "AVG Secure Browser", "is_bot": false, "count": 8, "ctry_name": 8, "intgrtd_mngmt_name": 8, "intgrtd_operating_team_name": 8, "city": 8, "st": 8, "sec_lvl_domn": 7, "device_type": 0, "operating_sys": 8, "ip_addr": 8, "user_agent": 8, "VISIT": 8, "ENGD_VISIT": 8, "VIEWS": 8, "page_url": 8, "wk": 8, "mth": 8, "yr": 8, "page_vw_ts": 8, "os": 8, "user_os": 8}, {"user_browser": "Aloha Browser", "is_bot": false, "count": 12, "ctry_name": 12, "intgrtd_mngmt_name": 12, "intgrtd_operating_team_name": 12, "city": 12, "st": 12, "sec_lvl_domn": 10, "device_type": 12, "operating_sys": 12, "ip_addr": 12, "user_agent": 12, "VISIT": 12, "ENGD_VISIT": 12, "VIEWS": 12, "page_url": 12, "wk": 12, "mth": 12, "yr": 12, "page_vw_ts": 12, "os": 12, "user_os": 12}, {"user_browser": "Amigo", "is_bot": false, "count": 4, "ctry_name": 4, "intgrtd_mngmt_name": 4, "intgrtd_operating_team_name": 4, "city": 4, "st": 4, "sec_lvl_domn": 3, "device_type": 0, "operating_sys": 4, "ip_addr": 4, "user_agent": 4, "VISIT": 4, "ENGD_VISIT": 4, "VIEWS": 4, "page_url": 4, "wk": 4, "mth": 4, "yr": 4, "page_vw_ts": 4, "os": 4, "user_os": 4}, {"user_browser": "Android Browser", "is_bot": false, "count": 478, "ctry_name": 478, "intgrtd_mngmt_name": 478, "intgrtd_operating_team_name": 478, "city": 469, "st": 474, "sec_lvl_domn": 145, "device_type": 470, "operating_sys": 478, "ip_addr": 478, "user_agent": 478, "VISIT": 478, "ENGD_VISIT": 478, "VIEWS": 478, "page_url": 478, "wk": 478, "mth": 478, "yr": 478, "page_vw_ts": 477, "os": 478, "user_os": 478}, {"user_browser": "Apple Core Media", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 0, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Apple News", "is_bot": false, "count": 183, "ctry_name": 183, "intgrtd_mngmt_name": 183, "intgrtd_operating_team_name": 183, "city": 183, "st": 183, "sec_lvl_domn": 163, "device_type": 183, "operating_sys": 183, "ip_addr": 183, "user_agent": 183, "VISIT": 183, "ENGD_VISIT": 183, "VIEWS": 183, "page_url": 183, "wk": 183, "mth": 183, "yr": 183, "page_vw_ts": 183, "os": 183, "user_os": 183}, {"user_browser": "Avast", "is_bot": false, "count": 4, "ctry_name": 4, "intgrtd_mngmt_name": 4, "intgrtd_operating_team_name": 4, "city": 4, "st": 4, "sec_lvl_domn": 4, "device_type": 0, "operating_sys": 4, "ip_addr": 4, "user_agent": 4, "VISIT": 4, "ENGD_VISIT": 4, "VIEWS": 4, "page_url": 4, "wk": 4, "mth": 4, "yr": 4, "page_vw_ts": 4, "os": 4, "user_os": 4}, {"user_browser": "BDD2232C-736F-4CAE-A3E1", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Baidu Box App", "is_bot": false, "count": 215, "ctry_name": 215, "intgrtd_mngmt_name": 215, "intgrtd_operating_team_name": 215, "city": 213, "st": 215, "sec_lvl_domn": 30, "device_type": 215, "operating_sys": 215, "ip_addr": 215, "user_agent": 215, "VISIT": 215, "ENGD_VISIT": 215, "VIEWS": 215, "page_url": 215, "wk": 215, "mth": 215, "yr": 215, "page_vw_ts": 215, "os": 215, "user_os": 215}, {"user_browser": "Baidu Browser", "is_bot": false, "count": 2, "ctry_name": 2, "intgrtd_mngmt_name": 2, "intgrtd_operating_team_name": 2, "city": 2, "st": 2, "sec_lvl_domn": 0, "device_type": 2, "operating_sys": 2, "ip_addr": 2, "user_agent": 2, "VISIT": 2, "ENGD_VISIT": 2, "VIEWS": 2, "page_url": 2, "wk": 2, "mth": 2, "yr": 2, "page_vw_ts": 2, "os": 2, "user_os": 2}, {"user_browser": "Baidu Spark", "is_bot": false, "count": 89, "ctry_name": 89, "intgrtd_mngmt_name": 89, "intgrtd_operating_team_name": 89, "city": 88, "st": 89, "sec_lvl_domn": 22, "device_type": 1, "operating_sys": 89, "ip_addr": 89, "user_agent": 89, "VISIT": 89, "ENGD_VISIT": 89, "VIEWS": 89, "page_url": 89, "wk": 89, "mth": 89, "yr": 89, "page_vw_ts": 89, "os": 89, "user_os": 89}, {"user_browser": "Basilisk", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Beamrise", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "BingWebApp", "is_bot": false, "count": 16, "ctry_name": 16, "intgrtd_mngmt_name": 16, "intgrtd_operating_team_name": 16, "city": 16, "st": 16, "sec_lvl_domn": 10, "device_type": 16, "operating_sys": 16, "ip_addr": 16, "user_agent": 16, "VISIT": 16, "ENGD_VISIT": 16, "VIEWS": 16, "page_url": 16, "wk": 16, "mth": 16, "yr": 16, "page_vw_ts": 16, "os": 16, "user_os": 16}, {"user_browser": "BlackBerry Browser", "is_bot": false, "count": 14, "ctry_name": 14, "intgrtd_mngmt_name": 14, "intgrtd_operating_team_name": 14, "city": 14, "st": 14, "sec_lvl_domn": 8, "device_type": 14, "operating_sys": 14, "ip_addr": 14, "user_agent": 14, "VISIT": 14, "ENGD_VISIT": 14, "VIEWS": 14, "page_url": 14, "wk": 14, "mth": 14, "yr": 14, "page_vw_ts": 14, "os": 14, "user_os": 14}, {"user_browser": "C8C4A4B1-2BEF-4FD9", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "C96298C3-CDBA", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "CM Browser", "is_bot": false, "count": 31, "ctry_name": 31, "intgrtd_mngmt_name": 31, "intgrtd_operating_team_name": 31, "city": 31, "st": 31, "sec_lvl_domn": 14, "device_type": 31, "operating_sys": 31, "ip_addr": 31, "user_agent": 31, "VISIT": 31, "ENGD_VISIT": 31, "VIEWS": 31, "page_url": 31, "wk": 31, "mth": 31, "yr": 31, "page_vw_ts": 31, "os": 31, "user_os": 31}, {"user_browser": "Cheetah Browser", "is_bot": false, "count": 248, "ctry_name": 248, "intgrtd_mngmt_name": 248, "intgrtd_operating_team_name": 248, "city": 247, "st": 248, "sec_lvl_domn": 46, "device_type": 0, "operating_sys": 248, "ip_addr": 248, "user_agent": 248, "VISIT": 248, "ENGD_VISIT": 248, "VIEWS": 248, "page_url": 248, "wk": 248, "mth": 248, "yr": 248, "page_vw_ts": 248, "os": 248, "user_os": 248}, {"user_browser": "Chrome", "is_bot": false, "count": 218906, "ctry_name": 218906, "intgrtd_mngmt_name": 218906, "intgrtd_operating_team_name": 218906, "city": 208794, "st": 208996, "sec_lvl_domn": 153333, "device_type": 1239, "operating_sys": 218906, "ip_addr": 218906, "user_agent": 218906, "VISIT": 218906, "ENGD_VISIT": 218906, "VIEWS": 218906, "page_url": 218905, "wk": 218906, "mth": 218906, "yr": 218906, "page_vw_ts": 218361, "os": 218906, "user_os": 218906}, {"user_browser": "Chrome Mobile", "is_bot": false, "count": 29342, "ctry_name": 29342, "intgrtd_mngmt_name": 29342, "intgrtd_operating_team_name": 29342, "city": 27317, "st": 27327, "sec_lvl_domn": 17119, "device_type": 29340, "operating_sys": 29342, "ip_addr": 29342, "user_agent": 29342, "VISIT": 29342, "ENGD_VISIT": 29342, "VIEWS": 29342, "page_url": 29342, "wk": 29342, "mth": 29342, "yr": 29342, "page_vw_ts": 29265, "os": 29342, "user_os": 29342}, {"user_browser": "Chrome Mobile iOS", "is_bot": false, "count": 2130, "ctry_name": 2130, "intgrtd_mngmt_name": 2130, "intgrtd_operating_team_name": 2130, "city": 2120, "st": 2120, "sec_lvl_domn": 1548, "device_type": 2130, "operating_sys": 2130, "ip_addr": 2130, "user_agent": 2130, "VISIT": 2130, "ENGD_VISIT": 2130, "VIEWS": 2130, "page_url": 2130, "wk": 2130, "mth": 2130, "yr": 2130, "page_vw_ts": 2124, "os": 2130, "user_os": 2130}, {"user_browser": "Chrome Webview", "is_bot": false, "count": 4483, "ctry_name": 4483, "intgrtd_mngmt_name": 4483, "intgrtd_operating_team_name": 4483, "city": 4321, "st": 4364, "sec_lvl_domn": 1522, "device_type": 4482, "operating_sys": 4483, "ip_addr": 4483, "user_agent": 4483, "VISIT": 4483, "ENGD_VISIT": 4483, "VIEWS": 4483, "page_url": 4483, "wk": 4483, "mth": 4483, "yr": 4483, "page_vw_ts": 4475, "os": 4483, "user_os": 4483}, {"user_browser": "Chromium", "is_bot": false, "count": 756, "ctry_name": 756, "intgrtd_mngmt_name": 756, "intgrtd_operating_team_name": 756, "city": 753, "st": 753, "sec_lvl_domn": 563, "device_type": 1, "operating_sys": 756, "ip_addr": 756, "user_agent": 756, "VISIT": 756, "ENGD_VISIT": 756, "VIEWS": 756, "page_url": 756, "wk": 756, "mth": 756, "yr": 756, "page_vw_ts": 756, "os": 756, "user_os": 756}, {"user_browser": "Coc Coc", "is_bot": false, "count": 177, "ctry_name": 177, "intgrtd_mngmt_name": 177, "intgrtd_operating_team_name": 177, "city": 177, "st": 177, "sec_lvl_domn": 88, "device_type": 6, "operating_sys": 177, "ip_addr": 177, "user_agent": 177, "VISIT": 177, "ENGD_VISIT": 177, "VIEWS": 177, "page_url": 177, "wk": 177, "mth": 177, "yr": 177, "page_vw_ts": 177, "os": 177, "user_os": 177}, {"user_browser": "Comodo Dragon", "is_bot": false, "count": 4, "ctry_name": 4, "intgrtd_mngmt_name": 4, "intgrtd_operating_team_name": 4, "city": 4, "st": 4, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 4, "ip_addr": 4, "user_agent": 4, "VISIT": 4, "ENGD_VISIT": 4, "VIEWS": 4, "page_url": 4, "wk": 4, "mth": 4, "yr": 4, "page_vw_ts": 4, "os": 4, "user_os": 4}, {"user_browser": "CrosswalkApp", "is_bot": false, "count": 97, "ctry_name": 97, "intgrtd_mngmt_name": 97, "intgrtd_operating_team_name": 97, "city": 97, "st": 97, "sec_lvl_domn": 6, "device_type": 97, "operating_sys": 97, "ip_addr": 97, "user_agent": 97, "VISIT": 97, "ENGD_VISIT": 97, "VIEWS": 97, "page_url": 97, "wk": 97, "mth": 97, "yr": 97, "page_vw_ts": 97, "os": 97, "user_os": 97}, {"user_browser": "Cyberfox", "is_bot": false, "count": 5, "ctry_name": 5, "intgrtd_mngmt_name": 5, "intgrtd_operating_team_name": 5, "city": 5, "st": 5, "sec_lvl_domn": 5, "device_type": 0, "operating_sys": 5, "ip_addr": 5, "user_agent": 5, "VISIT": 5, "ENGD_VISIT": 5, "VIEWS": 5, "page_url": 5, "wk": 5, "mth": 5, "yr": 5, "page_vw_ts": 5, "os": 5, "user_os": 5}, {"user_browser": "EUI Browser", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Ecosia", "is_bot": false, "count": 10, "ctry_name": 10, "intgrtd_mngmt_name": 10, "intgrtd_operating_team_name": 10, "city": 10, "st": 10, "sec_lvl_domn": 10, "device_type": 10, "operating_sys": 10, "ip_addr": 10, "user_agent": 10, "VISIT": 10, "ENGD_VISIT": 10, "VIEWS": 10, "page_url": 10, "wk": 10, "mth": 10, "yr": 10, "page_vw_ts": 10, "os": 10, "user_os": 10}, {"user_browser": "FDAA8E76-D4CE-4EF6-97FC", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Facebook", "is_bot": false, "count": 2571, "ctry_name": 2571, "intgrtd_mngmt_name": 2571, "intgrtd_operating_team_name": 2571, "city": 2552, "st": 2552, "sec_lvl_domn": 1902, "device_type": 2570, "operating_sys": 2571, "ip_addr": 2571, "user_agent": 2571, "VISIT": 2571, "ENGD_VISIT": 2571, "VIEWS": 2571, "page_url": 2571, "wk": 2571, "mth": 2571, "yr": 2571, "page_vw_ts": 2560, "os": 2571, "user_os": 2571}, {"user_browser": "Facebook Messenger", "is_bot": false, "count": 112, "ctry_name": 112, "intgrtd_mngmt_name": 112, "intgrtd_operating_team_name": 112, "city": 112, "st": 112, "sec_lvl_domn": 89, "device_type": 112, "operating_sys": 112, "ip_addr": 112, "user_agent": 112, "VISIT": 112, "ENGD_VISIT": 112, "VIEWS": 112, "page_url": 112, "wk": 112, "mth": 112, "yr": 112, "page_vw_ts": 112, "os": 112, "user_os": 112}, {"user_browser": "Falkon", "is_bot": false, "count": 2, "ctry_name": 2, "intgrtd_mngmt_name": 2, "intgrtd_operating_team_name": 2, "city": 2, "st": 2, "sec_lvl_domn": 2, "device_type": 0, "operating_sys": 2, "ip_addr": 2, "user_agent": 2, "VISIT": 2, "ENGD_VISIT": 2, "VIEWS": 2, "page_url": 2, "wk": 2, "mth": 2, "yr": 2, "page_vw_ts": 2, "os": 2, "user_os": 2}, {"user_browser": "Firefox", "is_bot": false, "count": 32598, "ctry_name": 32598, "intgrtd_mngmt_name": 32598, "intgrtd_operating_team_name": 32598, "city": 31544, "st": 31614, "sec_lvl_domn": 25011, "device_type": 0, "operating_sys": 32598, "ip_addr": 32598, "user_agent": 32598, "VISIT": 32598, "ENGD_VISIT": 32598, "VIEWS": 32598, "page_url": 32598, "wk": 32598, "mth": 32598, "yr": 32598, "page_vw_ts": 32522, "os": 32598, "user_os": 32598}, {"user_browser": "Firefox Focus", "is_bot": false, "count": 20, "ctry_name": 20, "intgrtd_mngmt_name": 20, "intgrtd_operating_team_name": 20, "city": 19, "st": 19, "sec_lvl_domn": 14, "device_type": 20, "operating_sys": 20, "ip_addr": 20, "user_agent": 20, "VISIT": 20, "ENGD_VISIT": 20, "VIEWS": 20, "page_url": 20, "wk": 20, "mth": 20, "yr": 20, "page_vw_ts": 20, "os": 20, "user_os": 20}, {"user_browser": "Firefox Mobile", "is_bot": false, "count": 666, "ctry_name": 666, "intgrtd_mngmt_name": 666, "intgrtd_operating_team_name": 666, "city": 662, "st": 662, "sec_lvl_domn": 193, "device_type": 666, "operating_sys": 666, "ip_addr": 666, "user_agent": 666, "VISIT": 666, "ENGD_VISIT": 666, "VIEWS": 666, "page_url": 666, "wk": 666, "mth": 666, "yr": 666, "page_vw_ts": 664, "os": 666, "user_os": 666}, {"user_browser": "Firefox Mobile iOS", "is_bot": false, "count": 98, "ctry_name": 98, "intgrtd_mngmt_name": 98, "intgrtd_operating_team_name": 98, "city": 97, "st": 97, "sec_lvl_domn": 73, "device_type": 98, "operating_sys": 98, "ip_addr": 98, "user_agent": 98, "VISIT": 98, "ENGD_VISIT": 98, "VIEWS": 98, "page_url": 98, "wk": 98, "mth": 98, "yr": 98, "page_vw_ts": 98, "os": 98, "user_os": 98}, {"user_browser": "Firefox Rocket", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 0, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Flipboard App", "is_bot": false, "count": 79, "ctry_name": 79, "intgrtd_mngmt_name": 79, "intgrtd_operating_team_name": 79, "city": 79, "st": 79, "sec_lvl_domn": 68, "device_type": 79, "operating_sys": 79, "ip_addr": 79, "user_agent": 79, "VISIT": 79, "ENGD_VISIT": 79, "VIEWS": 79, "page_url": 79, "wk": 79, "mth": 79, "yr": 79, "page_vw_ts": 79, "os": 79, "user_os": 79}, {"user_browser": "Flock", "is_bot": false, "count": 2, "ctry_name": 2, "intgrtd_mngmt_name": 2, "intgrtd_operating_team_name": 2, "city": 2, "st": 2, "sec_lvl_domn": 2, "device_type": 0, "operating_sys": 2, "ip_addr": 2, "user_agent": 2, "VISIT": 2, "ENGD_VISIT": 2, "VIEWS": 2, "page_url": 2, "wk": 2, "mth": 2, "yr": 2, "page_vw_ts": 2, "os": 2, "user_os": 2}, {"user_browser": "FreeU", "is_bot": false, "count": 3, "ctry_name": 3, "intgrtd_mngmt_name": 3, "intgrtd_operating_team_name": 3, "city": 3, "st": 3, "sec_lvl_domn": 3, "device_type": 0, "operating_sys": 3, "ip_addr": 3, "user_agent": 3, "VISIT": 3, "ENGD_VISIT": 3, "VIEWS": 3, "page_url": 3, "wk": 3, "mth": 3, "yr": 3, "page_vw_ts": 3, "os": 3, "user_os": 3}, {"user_browser": "GNOME Web", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Google Earth", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Google Search App", "is_bot": false, "count": 1315, "ctry_name": 1315, "intgrtd_mngmt_name": 1315, "intgrtd_operating_team_name": 1315, "city": 1303, "st": 1303, "sec_lvl_domn": 1076, "device_type": 1315, "operating_sys": 1315, "ip_addr": 1315, "user_agent": 1315, "VISIT": 1315, "ENGD_VISIT": 1315, "VIEWS": 1315, "page_url": 1315, "wk": 1315, "mth": 1315, "yr": 1315, "page_vw_ts": 1312, "os": 1315, "user_os": 1315}, {"user_browser": "Hawk Turbo Browser", "is_bot": false, "count": 2, "ctry_name": 2, "intgrtd_mngmt_name": 2, "intgrtd_operating_team_name": 2, "city": 2, "st": 2, "sec_lvl_domn": 1, "device_type": 2, "operating_sys": 2, "ip_addr": 2, "user_agent": 2, "VISIT": 2, "ENGD_VISIT": 2, "VIEWS": 2, "page_url": 2, "wk": 2, "mth": 2, "yr": 2, "page_vw_ts": 2, "os": 2, "user_os": 2}, {"user_browser": "Html2Jpg Com", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 0, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Huawei Browser", "is_bot": false, "count": 6, "ctry_name": 6, "intgrtd_mngmt_name": 6, "intgrtd_operating_team_name": 6, "city": 6, "st": 6, "sec_lvl_domn": 3, "device_type": 6, "operating_sys": 6, "ip_addr": 6, "user_agent": 6, "VISIT": 6, "ENGD_VISIT": 6, "VIEWS": 6, "page_url": 6, "wk": 6, "mth": 6, "yr": 6, "page_vw_ts": 6, "os": 6, "user_os": 6}, {"user_browser": "IE Mobile", "is_bot": false, "count": 33, "ctry_name": 33, "intgrtd_mngmt_name": 33, "intgrtd_operating_team_name": 33, "city": 32, "st": 32, "sec_lvl_domn": 13, "device_type": 33, "operating_sys": 33, "ip_addr": 33, "user_agent": 33, "VISIT": 33, "ENGD_VISIT": 33, "VIEWS": 33, "page_url": 33, "wk": 33, "mth": 33, "yr": 33, "page_vw_ts": 33, "os": 33, "user_os": 33}, {"user_browser": "IceDragon", "is_bot": false, "count": 4, "ctry_name": 4, "intgrtd_mngmt_name": 4, "intgrtd_operating_team_name": 4, "city": 4, "st": 4, "sec_lvl_domn": 3, "device_type": 0, "operating_sys": 4, "ip_addr": 4, "user_agent": 4, "VISIT": 4, "ENGD_VISIT": 4, "VIEWS": 4, "page_url": 4, "wk": 4, "mth": 4, "yr": 4, "page_vw_ts": 4, "os": 4, "user_os": 4}, {"user_browser": "Iceweasel", "is_bot": false, "count": 3, "ctry_name": 3, "intgrtd_mngmt_name": 3, "intgrtd_operating_team_name": 3, "city": 3, "st": 3, "sec_lvl_domn": 3, "device_type": 0, "operating_sys": 3, "ip_addr": 3, "user_agent": 3, "VISIT": 3, "ENGD_VISIT": 3, "VIEWS": 3, "page_url": 3, "wk": 3, "mth": 3, "yr": 3, "page_vw_ts": 3, "os": 3, "user_os": 3}, {"user_browser": "Instagram App", "is_bot": false, "count": 110, "ctry_name": 110, "intgrtd_mngmt_name": 110, "intgrtd_operating_team_name": 110, "city": 108, "st": 108, "sec_lvl_domn": 81, "device_type": 110, "operating_sys": 110, "ip_addr": 110, "user_agent": 110, "VISIT": 110, "ENGD_VISIT": 110, "VIEWS": 110, "page_url": 110, "wk": 110, "mth": 110, "yr": 110, "page_vw_ts": 110, "os": 110, "user_os": 110}, {"user_browser": "Internet Explorer", "is_bot": false, "count": 40269, "ctry_name": 40269, "intgrtd_mngmt_name": 40269, "intgrtd_operating_team_name": 40269, "city": 36821, "st": 36871, "sec_lvl_domn": 28718, "device_type": 13, "operating_sys": 40269, "ip_addr": 40269, "user_agent": 40269, "VISIT": 40269, "ENGD_VISIT": 40269, "VIEWS": 40269, "page_url": 40269, "wk": 40269, "mth": 40269, "yr": 40269, "page_vw_ts": 40183, "os": 40269, "user_os": 40269}, {"user_browser": "Iridium", "is_bot": false, "count": 5, "ctry_name": 5, "intgrtd_mngmt_name": 5, "intgrtd_operating_team_name": 5, "city": 5, "st": 5, "sec_lvl_domn": 5, "device_type": 0, "operating_sys": 5, "ip_addr": 5, "user_agent": 5, "VISIT": 5, "ENGD_VISIT": 5, "VIEWS": 5, "page_url": 5, "wk": 5, "mth": 5, "yr": 5, "page_vw_ts": 5, "os": 5, "user_os": 5}, {"user_browser": "Iron", "is_bot": false, "count": 48, "ctry_name": 48, "intgrtd_mngmt_name": 48, "intgrtd_operating_team_name": 48, "city": 47, "st": 47, "sec_lvl_domn": 43, "device_type": 1, "operating_sys": 48, "ip_addr": 48, "user_agent": 48, "VISIT": 48, "ENGD_VISIT": 48, "VIEWS": 48, "page_url": 48, "wk": 48, "mth": 48, "yr": 48, "page_vw_ts": 48, "os": 48, "user_os": 48}, {"user_browser": "Iron Mobile", "is_bot": false, "count": 4, "ctry_name": 4, "intgrtd_mngmt_name": 4, "intgrtd_operating_team_name": 4, "city": 3, "st": 3, "sec_lvl_domn": 3, "device_type": 4, "operating_sys": 4, "ip_addr": 4, "user_agent": 4, "VISIT": 4, "ENGD_VISIT": 4, "VIEWS": 4, "page_url": 4, "wk": 4, "mth": 4, "yr": 4, "page_vw_ts": 4, "os": 4, "user_os": 4}, {"user_browser": "Jio Browser", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 0, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Kazehakase", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Kinza", "is_bot": false, "count": 8, "ctry_name": 8, "intgrtd_mngmt_name": 8, "intgrtd_operating_team_name": 8, "city": 8, "st": 8, "sec_lvl_domn": 6, "device_type": 0, "operating_sys": 8, "ip_addr": 8, "user_agent": 8, "VISIT": 8, "ENGD_VISIT": 8, "VIEWS": 8, "page_url": 8, "wk": 8, "mth": 8, "yr": 8, "page_vw_ts": 8, "os": 8, "user_os": 8}, {"user_browser": "Konqueror", "is_bot": false, "count": 4, "ctry_name": 4, "intgrtd_mngmt_name": 4, "intgrtd_operating_team_name": 4, "city": 4, "st": 4, "sec_lvl_domn": 4, "device_type": 1, "operating_sys": 4, "ip_addr": 4, "user_agent": 4, "VISIT": 4, "ENGD_VISIT": 4, "VIEWS": 4, "page_url": 4, "wk": 4, "mth": 4, "yr": 4, "page_vw_ts": 4, "os": 4, "user_os": 4}, {"user_browser": "Line", "is_bot": false, "count": 75, "ctry_name": 75, "intgrtd_mngmt_name": 75, "intgrtd_operating_team_name": 75, "city": 75, "st": 75, "sec_lvl_domn": 66, "device_type": 75, "operating_sys": 75, "ip_addr": 75, "user_agent": 75, "VISIT": 75, "ENGD_VISIT": 75, "VIEWS": 75, "page_url": 75, "wk": 75, "mth": 75, "yr": 75, "page_vw_ts": 75, "os": 75, "user_os": 75}, {"user_browser": "Lunascape", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 0, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "MIUI Browser", "is_bot": false, "count": 843, "ctry_name": 843, "intgrtd_mngmt_name": 843, "intgrtd_operating_team_name": 843, "city": 838, "st": 839, "sec_lvl_domn": 219, "device_type": 829, "operating_sys": 843, "ip_addr": 843, "user_agent": 843, "VISIT": 843, "ENGD_VISIT": 843, "VIEWS": 843, "page_url": 843, "wk": 843, "mth": 843, "yr": 843, "page_vw_ts": 842, "os": 843, "user_os": 843}, {"user_browser": "Maxthon", "is_bot": false, "count": 243, "ctry_name": 243, "intgrtd_mngmt_name": 243, "intgrtd_operating_team_name": 243, "city": 241, "st": 241, "sec_lvl_domn": 85, "device_type": 0, "operating_sys": 243, "ip_addr": 243, "user_agent": 243, "VISIT": 243, "ENGD_VISIT": 243, "VIEWS": 243, "page_url": 243, "wk": 243, "mth": 243, "yr": 243, "page_vw_ts": 242, "os": 243, "user_os": 243}, {"user_browser": "Meizu Browser", "is_bot": false, "count": 13, "ctry_name": 13, "intgrtd_mngmt_name": 13, "intgrtd_operating_team_name": 13, "city": 13, "st": 13, "sec_lvl_domn": 6, "device_type": 12, "operating_sys": 13, "ip_addr": 13, "user_agent": 13, "VISIT": 13, "ENGD_VISIT": 13, "VIEWS": 13, "page_url": 13, "wk": 13, "mth": 13, "yr": 13, "page_vw_ts": 13, "os": 13, "user_os": 13}, {"user_browser": "Microsoft Edge", "is_bot": false, "count": 13251, "ctry_name": 13251, "intgrtd_mngmt_name": 13251, "intgrtd_operating_team_name": 13251, "city": 12887, "st": 12894, "sec_lvl_domn": 9696, "device_type": 123, "operating_sys": 13251, "ip_addr": 13251, "user_agent": 13251, "VISIT": 13251, "ENGD_VISIT": 13251, "VIEWS": 13251, "page_url": 13251, "wk": 13251, "mth": 13251, "yr": 13251, "page_vw_ts": 13219, "os": 13251, "user_os": 13251}, {"user_browser": "Midori", "is_bot": false, "count": 4, "ctry_name": 4, "intgrtd_mngmt_name": 4, "intgrtd_operating_team_name": 4, "city": 4, "st": 4, "sec_lvl_domn": 2, "device_type": 0, "operating_sys": 4, "ip_addr": 4, "user_agent": 4, "VISIT": 4, "ENGD_VISIT": 4, "VIEWS": 4, "page_url": 4, "wk": 4, "mth": 4, "yr": 4, "page_vw_ts": 4, "os": 4, "user_os": 4}, {"user_browser": "Mobile Safari", "is_bot": false, "count": 27340, "ctry_name": 27340, "intgrtd_mngmt_name": 27340, "intgrtd_operating_team_name": 27340, "city": 27072, "st": 27088, "sec_lvl_domn": 21372, "device_type": 27339, "operating_sys": 27340, "ip_addr": 27340, "user_agent": 27340, "VISIT": 27340, "ENGD_VISIT": 27340, "VIEWS": 27340, "page_url": 27340, "wk": 27340, "mth": 27340, "yr": 27340, "page_vw_ts": 27254, "os": 27340, "user_os": 27340}, {"user_browser": "Mobile Silk", "is_bot": false, "count": 329, "ctry_name": 329, "intgrtd_mngmt_name": 329, "intgrtd_operating_team_name": 329, "city": 329, "st": 329, "sec_lvl_domn": 294, "device_type": 329, "operating_sys": 329, "ip_addr": 329, "user_agent": 329, "VISIT": 329, "ENGD_VISIT": 329, "VIEWS": 329, "page_url": 329, "wk": 329, "mth": 329, "yr": 329, "page_vw_ts": 328, "os": 329, "user_os": 329}, {"user_browser": "NetFront", "is_bot": false, "count": 77, "ctry_name": 77, "intgrtd_mngmt_name": 77, "intgrtd_operating_team_name": 77, "city": 76, "st": 76, "sec_lvl_domn": 69, "device_type": 77, "operating_sys": 77, "ip_addr": 77, "user_agent": 77, "VISIT": 77, "ENGD_VISIT": 77, "VIEWS": 77, "page_url": 77, "wk": 77, "mth": 77, "yr": 77, "page_vw_ts": 75, "os": 77, "user_os": 77}, {"user_browser": "Netscape", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "NewsArticle App", "is_bot": false, "count": 9, "ctry_name": 9, "intgrtd_mngmt_name": 9, "intgrtd_operating_team_name": 9, "city": 9, "st": 9, "sec_lvl_domn": 7, "device_type": 9, "operating_sys": 9, "ip_addr": 9, "user_agent": 9, "VISIT": 9, "ENGD_VISIT": 9, "VIEWS": 9, "page_url": 9, "wk": 9, "mth": 9, "yr": 9, "page_vw_ts": 9, "os": 9, "user_os": 9}, {"user_browser": "Nokia Browser", "is_bot": false, "count": 2, "ctry_name": 2, "intgrtd_mngmt_name": 2, "intgrtd_operating_team_name": 2, "city": 2, "st": 2, "sec_lvl_domn": 2, "device_type": 2, "operating_sys": 2, "ip_addr": 2, "user_agent": 2, "VISIT": 2, "ENGD_VISIT": 2, "VIEWS": 2, "page_url": 2, "wk": 2, "mth": 2, "yr": 2, "page_vw_ts": 2, "os": 2, "user_os": 2}, {"user_browser": "Opera", "is_bot": false, "count": 2968, "ctry_name": 2968, "intgrtd_mngmt_name": 2968, "intgrtd_operating_team_name": 2968, "city": 2933, "st": 2934, "sec_lvl_domn": 2051, "device_type": 15, "operating_sys": 2968, "ip_addr": 2968, "user_agent": 2968, "VISIT": 2968, "ENGD_VISIT": 2968, "VIEWS": 2968, "page_url": 2968, "wk": 2968, "mth": 2968, "yr": 2968, "page_vw_ts": 2962, "os": 2968, "user_os": 2968}, {"user_browser": "Opera Devices", "is_bot": false, "count": 9, "ctry_name": 9, "intgrtd_mngmt_name": 9, "intgrtd_operating_team_name": 9, "city": 9, "st": 9, "sec_lvl_domn": 7, "device_type": 9, "operating_sys": 9, "ip_addr": 9, "user_agent": 9, "VISIT": 9, "ENGD_VISIT": 9, "VIEWS": 9, "page_url": 9, "wk": 9, "mth": 9, "yr": 9, "page_vw_ts": 9, "os": 9, "user_os": 9}, {"user_browser": "Opera Mini", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Opera Mini iOS", "is_bot": false, "count": 5, "ctry_name": 5, "intgrtd_mngmt_name": 5, "intgrtd_operating_team_name": 5, "city": 5, "st": 5, "sec_lvl_domn": 3, "device_type": 4, "operating_sys": 5, "ip_addr": 5, "user_agent": 5, "VISIT": 5, "ENGD_VISIT": 5, "VIEWS": 5, "page_url": 5, "wk": 5, "mth": 5, "yr": 5, "page_vw_ts": 5, "os": 5, "user_os": 5}, {"user_browser": "Opera Mobile", "is_bot": false, "count": 277, "ctry_name": 277, "intgrtd_mngmt_name": 277, "intgrtd_operating_team_name": 277, "city": 266, "st": 266, "sec_lvl_domn": 157, "device_type": 277, "operating_sys": 277, "ip_addr": 277, "user_agent": 277, "VISIT": 277, "ENGD_VISIT": 277, "VIEWS": 277, "page_url": 277, "wk": 277, "mth": 277, "yr": 277, "page_vw_ts": 277, "os": 277, "user_os": 277}, {"user_browser": "Opera Touch", "is_bot": false, "count": 5, "ctry_name": 5, "intgrtd_mngmt_name": 5, "intgrtd_operating_team_name": 5, "city": 5, "st": 5, "sec_lvl_domn": 2, "device_type": 5, "operating_sys": 5, "ip_addr": 5, "user_agent": 5, "VISIT": 5, "ENGD_VISIT": 5, "VIEWS": 5, "page_url": 5, "wk": 5, "mth": 5, "yr": 5, "page_vw_ts": 5, "os": 5, "user_os": 5}, {"user_browser": "Oppo Browser", "is_bot": false, "count": 79, "ctry_name": 79, "intgrtd_mngmt_name": 79, "intgrtd_operating_team_name": 79, "city": 78, "st": 78, "sec_lvl_domn": 13, "device_type": 79, "operating_sys": 79, "ip_addr": 79, "user_agent": 79, "VISIT": 79, "ENGD_VISIT": 79, "VIEWS": 79, "page_url": 79, "wk": 79, "mth": 79, "yr": 79, "page_vw_ts": 79, "os": 79, "user_os": 79}, {"user_browser": "Ordissimo", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "PERFICIENT_PERF", "is_bot": false, "count": 7, "ctry_name": 7, "intgrtd_mngmt_name": 7, "intgrtd_operating_team_name": 7, "city": 7, "st": 7, "sec_lvl_domn": 7, "device_type": 0, "operating_sys": 7, "ip_addr": 7, "user_agent": 7, "VISIT": 7, "ENGD_VISIT": 7, "VIEWS": 7, "page_url": 7, "wk": 7, "mth": 7, "yr": 7, "page_vw_ts": 7, "os": 7, "user_os": 7}, {"user_browser": "Pale Moon", "is_bot": false, "count": 23, "ctry_name": 23, "intgrtd_mngmt_name": 23, "intgrtd_operating_team_name": 23, "city": 21, "st": 21, "sec_lvl_domn": 14, "device_type": 0, "operating_sys": 23, "ip_addr": 23, "user_agent": 23, "VISIT": 23, "ENGD_VISIT": 23, "VIEWS": 23, "page_url": 23, "wk": 23, "mth": 23, "yr": 23, "page_vw_ts": 23, "os": 23, "user_os": 23}, {"user_browser": "Pinterest", "is_bot": false, "count": 52, "ctry_name": 52, "intgrtd_mngmt_name": 52, "intgrtd_operating_team_name": 52, "city": 50, "st": 50, "sec_lvl_domn": 29, "device_type": 52, "operating_sys": 52, "ip_addr": 52, "user_agent": 52, "VISIT": 52, "ENGD_VISIT": 52, "VIEWS": 52, "page_url": 52, "wk": 52, "mth": 52, "yr": 52, "page_vw_ts": 52, "os": 52, "user_os": 52}, {"user_browser": "Puffin", "is_bot": false, "count": 55, "ctry_name": 55, "intgrtd_mngmt_name": 55, "intgrtd_operating_team_name": 55, "city": 55, "st": 55, "sec_lvl_domn": 55, "device_type": 55, "operating_sys": 55, "ip_addr": 55, "user_agent": 55, "VISIT": 55, "ENGD_VISIT": 55, "VIEWS": 55, "page_url": 55, "wk": 55, "mth": 55, "yr": 55, "page_vw_ts": 55, "os": 55, "user_os": 55}, {"user_browser": "QQ Browser", "is_bot": false, "count": 1186, "ctry_name": 1186, "intgrtd_mngmt_name": 1186, "intgrtd_operating_team_name": 1186, "city": 1182, "st": 1185, "sec_lvl_domn": 289, "device_type": 233, "operating_sys": 1186, "ip_addr": 1186, "user_agent": 1186, "VISIT": 1186, "ENGD_VISIT": 1186, "VIEWS": 1186, "page_url": 1186, "wk": 1186, "mth": 1186, "yr": 1186, "page_vw_ts": 1182, "os": 1186, "user_os": 1186}, {"user_browser": "QTWEB INTERNET BROWSER", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "QtWebEngine", "is_bot": false, "count": 6, "ctry_name": 6, "intgrtd_mngmt_name": 6, "intgrtd_operating_team_name": 6, "city": 6, "st": 6, "sec_lvl_domn": 6, "device_type": 5, "operating_sys": 6, "ip_addr": 6, "user_agent": 6, "VISIT": 6, "ENGD_VISIT": 6, "VIEWS": 6, "page_url": 6, "wk": 6, "mth": 6, "yr": 6, "page_vw_ts": 6, "os": 6, "user_os": 6}, {"user_browser": "QupZilla", "is_bot": false, "count": 2, "ctry_name": 2, "intgrtd_mngmt_name": 2, "intgrtd_operating_team_name": 2, "city": 2, "st": 2, "sec_lvl_domn": 2, "device_type": 0, "operating_sys": 2, "ip_addr": 2, "user_agent": 2, "VISIT": 2, "ENGD_VISIT": 2, "VIEWS": 2, "page_url": 2, "wk": 2, "mth": 2, "yr": 2, "page_vw_ts": 2, "os": 2, "user_os": 2}, {"user_browser": "Reeder", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "RockMelt", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Safari", "is_bot": false, "count": 9813, "ctry_name": 9813, "intgrtd_mngmt_name": 9813, "intgrtd_operating_team_name": 9813, "city": 9682, "st": 9685, "sec_lvl_domn": 7579, "device_type": 6, "operating_sys": 9813, "ip_addr": 9813, "user_agent": 9813, "VISIT": 9813, "ENGD_VISIT": 9813, "VIEWS": 9813, "page_url": 9813, "wk": 9813, "mth": 9813, "yr": 9813, "page_vw_ts": 9786, "os": 9813, "user_os": 9813}, {"user_browser": "Sailfish Browser", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "SalamWeb", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 0, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Samsung Browser", "is_bot": false, "count": 4408, "ctry_name": 4408, "intgrtd_mngmt_name": 4408, "intgrtd_operating_team_name": 4408, "city": 4352, "st": 4352, "sec_lvl_domn": 2689, "device_type": 4407, "operating_sys": 4408, "ip_addr": 4408, "user_agent": 4408, "VISIT": 4408, "ENGD_VISIT": 4408, "VIEWS": 4408, "page_url": 4408, "wk": 4408, "mth": 4408, "yr": 4408, "page_vw_ts": 4395, "os": 4408, "user_os": 4408}, {"user_browser": "SeaMonkey", "is_bot": false, "count": 20, "ctry_name": 20, "intgrtd_mngmt_name": 20, "intgrtd_operating_team_name": 20, "city": 20, "st": 20, "sec_lvl_domn": 10, "device_type": 0, "operating_sys": 20, "ip_addr": 20, "user_agent": 20, "VISIT": 20, "ENGD_VISIT": 20, "VIEWS": 20, "page_url": 20, "wk": 20, "mth": 20, "yr": 20, "page_vw_ts": 20, "os": 20, "user_os": 20}, {"user_browser": "Seznam Browser", "is_bot": false, "count": 5, "ctry_name": 5, "intgrtd_mngmt_name": 5, "intgrtd_operating_team_name": 5, "city": 5, "st": 5, "sec_lvl_domn": 5, "device_type": 0, "operating_sys": 5, "ip_addr": 5, "user_agent": 5, "VISIT": 5, "ENGD_VISIT": 5, "VIEWS": 5, "page_url": 5, "wk": 5, "mth": 5, "yr": 5, "page_vw_ts": 5, "os": 5, "user_os": 5}, {"user_browser": "Sina Weibo", "is_bot": false, "count": 2, "ctry_name": 2, "intgrtd_mngmt_name": 2, "intgrtd_operating_team_name": 2, "city": 2, "st": 2, "sec_lvl_domn": 1, "device_type": 2, "operating_sys": 2, "ip_addr": 2, "user_agent": 2, "VISIT": 2, "ENGD_VISIT": 2, "VIEWS": 2, "page_url": 2, "wk": 2, "mth": 2, "yr": 2, "page_vw_ts": 2, "os": 2, "user_os": 2}, {"user_browser": "Sleipnir", "is_bot": false, "count": 39, "ctry_name": 39, "intgrtd_mngmt_name": 39, "intgrtd_operating_team_name": 39, "city": 39, "st": 39, "sec_lvl_domn": 35, "device_type": 18, "operating_sys": 39, "ip_addr": 39, "user_agent": 39, "VISIT": 39, "ENGD_VISIT": 39, "VIEWS": 39, "page_url": 39, "wk": 39, "mth": 39, "yr": 39, "page_vw_ts": 39, "os": 39, "user_os": 39}, {"user_browser": "Sogou Explorer", "is_bot": false, "count": 573, "ctry_name": 573, "intgrtd_mngmt_name": 573, "intgrtd_operating_team_name": 573, "city": 565, "st": 571, "sec_lvl_domn": 93, "device_type": 0, "operating_sys": 573, "ip_addr": 573, "user_agent": 573, "VISIT": 573, "ENGD_VISIT": 573, "VIEWS": 573, "page_url": 573, "wk": 573, "mth": 573, "yr": 573, "page_vw_ts": 570, "os": 573, "user_os": 573}, {"user_browser": "Sogou Mobile Browser", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 0, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "SogouSearch App", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 0, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Sputnik Browser", "is_bot": false, "count": 5, "ctry_name": 5, "intgrtd_mngmt_name": 5, "intgrtd_operating_team_name": 5, "city": 5, "st": 5, "sec_lvl_domn": 5, "device_type": 0, "operating_sys": 5, "ip_addr": 5, "user_agent": 5, "VISIT": 5, "ENGD_VISIT": 5, "VIEWS": 5, "page_url": 5, "wk": 5, "mth": 5, "yr": 5, "page_vw_ts": 5, "os": 5, "user_os": 5}, {"user_browser": "TenFourFox", "is_bot": false, "count": 4, "ctry_name": 4, "intgrtd_mngmt_name": 4, "intgrtd_operating_team_name": 4, "city": 4, "st": 4, "sec_lvl_domn": 4, "device_type": 0, "operating_sys": 4, "ip_addr": 4, "user_agent": 4, "VISIT": 4, "ENGD_VISIT": 4, "VIEWS": 4, "page_url": 4, "wk": 4, "mth": 4, "yr": 4, "page_vw_ts": 4, "os": 4, "user_os": 4}, {"user_browser": "Thunderbird", "is_bot": false, "count": 2, "ctry_name": 2, "intgrtd_mngmt_name": 2, "intgrtd_operating_team_name": 2, "city": 2, "st": 2, "sec_lvl_domn": 2, "device_type": 0, "operating_sys": 2, "ip_addr": 2, "user_agent": 2, "VISIT": 2, "ENGD_VISIT": 2, "VIEWS": 2, "page_url": 2, "wk": 2, "mth": 2, "yr": 2, "page_vw_ts": 2, "os": 2, "user_os": 2}, {"user_browser": "UBrowser", "is_bot": false, "count": 201, "ctry_name": 201, "intgrtd_mngmt_name": 201, "intgrtd_operating_team_name": 201, "city": 200, "st": 201, "sec_lvl_domn": 63, "device_type": 0, "operating_sys": 201, "ip_addr": 201, "user_agent": 201, "VISIT": 201, "ENGD_VISIT": 201, "VIEWS": 201, "page_url": 201, "wk": 201, "mth": 201, "yr": 201, "page_vw_ts": 200, "os": 201, "user_os": 201}, {"user_browser": "UC Browser", "is_bot": false, "count": 743, "ctry_name": 743, "intgrtd_mngmt_name": 743, "intgrtd_operating_team_name": 743, "city": 738, "st": 739, "sec_lvl_domn": 87, "device_type": 739, "operating_sys": 743, "ip_addr": 743, "user_agent": 743, "VISIT": 743, "ENGD_VISIT": 743, "VIEWS": 743, "page_url": 743, "wk": 743, "mth": 743, "yr": 743, "page_vw_ts": 741, "os": 743, "user_os": 743}, {"user_browser": "UC Browser Mini", "is_bot": false, "count": 5, "ctry_name": 5, "intgrtd_mngmt_name": 5, "intgrtd_operating_team_name": 5, "city": 5, "st": 5, "sec_lvl_domn": 1, "device_type": 5, "operating_sys": 5, "ip_addr": 5, "user_agent": 5, "VISIT": 5, "ENGD_VISIT": 5, "VIEWS": 5, "page_url": 5, "wk": 5, "mth": 5, "yr": 5, "page_vw_ts": 5, "os": 5, "user_os": 5}, {"user_browser": "Vivaldi", "is_bot": false, "count": 184, "ctry_name": 184, "intgrtd_mngmt_name": 184, "intgrtd_operating_team_name": 184, "city": 182, "st": 184, "sec_lvl_domn": 151, "device_type": 0, "operating_sys": 184, "ip_addr": 184, "user_agent": 184, "VISIT": 184, "ENGD_VISIT": 184, "VIEWS": 184, "page_url": 184, "wk": 184, "mth": 184, "yr": 184, "page_vw_ts": 184, "os": 184, "user_os": 184}, {"user_browser": "W3SEARCH", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "Waterfox", "is_bot": false, "count": 28, "ctry_name": 28, "intgrtd_mngmt_name": 28, "intgrtd_operating_team_name": 28, "city": 27, "st": 27, "sec_lvl_domn": 23, "device_type": 0, "operating_sys": 28, "ip_addr": 28, "user_agent": 28, "VISIT": 28, "ENGD_VISIT": 28, "VIEWS": 28, "page_url": 28, "wk": 28, "mth": 28, "yr": 28, "page_vw_ts": 28, "os": 28, "user_os": 28}, {"user_browser": "WeChat", "is_bot": false, "count": 311, "ctry_name": 311, "intgrtd_mngmt_name": 311, "intgrtd_operating_team_name": 311, "city": 304, "st": 305, "sec_lvl_domn": 77, "device_type": 278, "operating_sys": 311, "ip_addr": 311, "user_agent": 311, "VISIT": 311, "ENGD_VISIT": 311, "VIEWS": 311, "page_url": 311, "wk": 311, "mth": 311, "yr": 311, "page_vw_ts": 310, "os": 311, "user_os": 311}, {"user_browser": "Whale Browser", "is_bot": false, "count": 59, "ctry_name": 59, "intgrtd_mngmt_name": 59, "intgrtd_operating_team_name": 59, "city": 59, "st": 59, "sec_lvl_domn": 13, "device_type": 1, "operating_sys": 59, "ip_addr": 59, "user_agent": 59, "VISIT": 59, "ENGD_VISIT": 59, "VIEWS": 59, "page_url": 59, "wk": 59, "mth": 59, "yr": 59, "page_vw_ts": 58, "os": 59, "user_os": 59}, {"user_browser": "Yahoo! Japan", "is_bot": false, "count": 103, "ctry_name": 103, "intgrtd_mngmt_name": 103, "intgrtd_operating_team_name": 103, "city": 103, "st": 103, "sec_lvl_domn": 98, "device_type": 103, "operating_sys": 103, "ip_addr": 103, "user_agent": 103, "VISIT": 103, "ENGD_VISIT": 103, "VIEWS": 103, "page_url": 103, "wk": 103, "mth": 103, "yr": 103, "page_vw_ts": 103, "os": 103, "user_os": 103}, {"user_browser": "Yandex Browser", "is_bot": false, "count": 483, "ctry_name": 483, "intgrtd_mngmt_name": 483, "intgrtd_operating_team_name": 483, "city": 467, "st": 475, "sec_lvl_domn": 340, "device_type": 50, "operating_sys": 483, "ip_addr": 483, "user_agent": 483, "VISIT": 483, "ENGD_VISIT": 483, "VIEWS": 483, "page_url": 483, "wk": 483, "mth": 483, "yr": 483, "page_vw_ts": 483, "os": 483, "user_os": 483}, {"user_browser": "Yandex Browser Lite", "is_bot": false, "count": 2, "ctry_name": 2, "intgrtd_mngmt_name": 2, "intgrtd_operating_team_name": 2, "city": 2, "st": 2, "sec_lvl_domn": 0, "device_type": 2, "operating_sys": 2, "ip_addr": 2, "user_agent": 2, "VISIT": 2, "ENGD_VISIT": 2, "VIEWS": 2, "page_url": 2, "wk": 2, "mth": 2, "yr": 2, "page_vw_ts": 2, "os": 2, "user_os": 2}, {"user_browser": "Z", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 1, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "hola! Browser", "is_bot": false, "count": 3, "ctry_name": 3, "intgrtd_mngmt_name": 3, "intgrtd_operating_team_name": 3, "city": 3, "st": 3, "sec_lvl_domn": 1, "device_type": 3, "operating_sys": 3, "ip_addr": 3, "user_agent": 3, "VISIT": 3, "ENGD_VISIT": 3, "VIEWS": 3, "page_url": 3, "wk": 3, "mth": 3, "yr": 3, "page_vw_ts": 3, "os": 3, "user_os": 3}, {"user_browser": "mCent", "is_bot": false, "count": 13, "ctry_name": 13, "intgrtd_mngmt_name": 13, "intgrtd_operating_team_name": 13, "city": 13, "st": 13, "sec_lvl_domn": 5, "device_type": 13, "operating_sys": 13, "ip_addr": 13, "user_agent": 13, "VISIT": 13, "ENGD_VISIT": 13, "VIEWS": 13, "page_url": 13, "wk": 13, "mth": 13, "yr": 13, "page_vw_ts": 13, "os": 13, "user_os": 13}, {"user_browser": "t-online.de Browser", "is_bot": false, "count": 1, "ctry_name": 1, "intgrtd_mngmt_name": 1, "intgrtd_operating_team_name": 1, "city": 1, "st": 1, "sec_lvl_domn": 1, "device_type": 0, "operating_sys": 1, "ip_addr": 1, "user_agent": 1, "VISIT": 1, "ENGD_VISIT": 1, "VIEWS": 1, "page_url": 1, "wk": 1, "mth": 1, "yr": 1, "page_vw_ts": 1, "os": 1, "user_os": 1}, {"user_browser": "vivo Browser", "is_bot": false, "count": 169, "ctry_name": 169, "intgrtd_mngmt_name": 169, "intgrtd_operating_team_name": 169, "city": 166, "st": 166, "sec_lvl_domn": 26, "device_type": 169, "operating_sys": 169, "ip_addr": 169, "user_agent": 169, "VISIT": 169, "ENGD_VISIT": 169, "VIEWS": 169, "page_url": 169, "wk": 169, "mth": 169, "yr": 169, "page_vw_ts": 168, "os": 169, "user_os": 169}]}};
+    const embed_opt = {};
+    const el = document.getElementById('vega-chart-7');
+    vegaEmbed("#vega-chart-7", spec, embed_opt)
+      .catch(error => showError(el, error));
+});
+</script>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="tocsv1"> I convert this dataframe to first half csv which I will be planning to use in other notebooks </h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sample_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;bots_firsthalf.csv&quot;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2> Now the same procedure for the rest of the data</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sample_df2</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="mi">400000</span><span class="p">:]</span>
+<span class="n">sample_df2</span><span class="o">.</span><span class="n">user_agent</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="n">sample_df2</span><span class="p">[</span><span class="s2">&quot;user_agent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">parse_family</span><span class="p">)</span>
+<span class="n">sample_df2</span><span class="p">[</span><span class="s2">&quot;user_browser&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">x</span>
+<span class="n">sample_df2</span><span class="o">.</span><span class="n">user_agent</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sample_df2</span><span class="p">[</span><span class="s2">&quot;user_os&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">sample_df2</span><span class="o">.</span><span class="n">user_agent</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">parse_os</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/lib/python3.7/site-packages/pandas/core/series.py:4494: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  self._update_inplace(result)
+/opt/conda/lib/python3.7/site-packages/ipykernel_launcher.py:4: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  after removing the cwd from sys.path.
+/opt/conda/lib/python3.7/site-packages/ipykernel_launcher.py:6: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sample_df2</span><span class="o">.</span><span class="n">user_agent</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sample_df2</span><span class="p">[</span><span class="s2">&quot;is_bot&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">sample_df2</span><span class="p">[</span><span class="s2">&quot;user_agent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">parse_is_bot</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/lib/python3.7/site-packages/pandas/core/series.py:4494: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  self._update_inplace(result)
+/opt/conda/lib/python3.7/site-packages/ipykernel_launcher.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="secondhalf">The secondHalf of the cvs</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sample_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;bots_secondhalf.csv&quot;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><h1 id="big"> concatenate both dataframe to the original big dataframe and then save that dataframe as a csv</h1></li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">the_big_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">sample_df</span><span class="p">,</span><span class="n">sample_df2</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">the_big_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;bots_full.csv&quot;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="conclusion"> TO BE CONTINUED!!! I WILL WORK ON A NEW NOTEBOOK OTHER THAN THIS STAY TUNED!!</h1>
+</div>
+</div>
+</div>
+&lt;/div&gt;
+ 
+
+</p></div></div></div></div>
+
+
+  </div><a class="u-url" href="/DataScienceBlog/2020/06/17/the-beginning-of-bots-detect-eda-and-new-csv.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/DataScienceBlog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/DataScienceBlog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/DataScienceBlog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Here You can see my projects and their JupyterNotebook :D</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/omegaji" title="omegaji"><svg class="svg-icon grey"><use xlink:href="/DataScienceBlog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/DataScienceBlog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -95,7 +95,7 @@
   
       ,"page1": {
           "title": "About Me",
-          "content": "Kaggle Profile My Linkedin Profile Github .",
+          "content": "Kaggle Profile&lt;p&gt;&lt;/p&gt; My Linkedin Profile&lt;p&gt;&lt;/p&gt; Github&lt;p&gt;&lt;/p&gt; .",
           "url": "https://omegaji.github.io/DataScienceBlog/about/",
           "relUrl": "/about/",
           "date": ""
